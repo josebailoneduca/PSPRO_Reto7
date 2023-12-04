@@ -1,4 +1,4 @@
-package reto7_1.a;
+package reto7_1.b;
 
 import java.util.Iterator;
 
@@ -84,7 +84,7 @@ public class Estadistica {
 	 * Impime la estadistica segun los datos actuales
 	 */
 	synchronized public static void imprimirEstadistica() {
-		System.out.println("\n\n\n\n\n\nRETO 7 1 A\n######################################################################");
+		System.out.println("\n\n\n\n\n\nRETO 7 1 B\n######################################################################");
 		System.out.println(String.format("Loro\tM. Esp. Comida\t N comido \tM. Esp. Colump \t N colump \t Estado"));
 		for (int i = 0; i < estadoLoros.length; i++) {
 			int mediaHambriento=(int) ((vecesComidas[i]==0)?0:(esperaTotalComida[i]/vecesComidas[i]));
