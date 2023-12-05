@@ -12,7 +12,7 @@ public class Bandeja {
 	private static Semaphore sHuecos = new Semaphore(Config.TAMANO_BANDEJA);
 
 	public static void ponerPizza(Pizza pizza) {
-		Estadistica.setEstadoCocinero(Estadistica.ESP_DEJA_PIZZA);
+		Estadistica.setEstadoCocinero(Estadistica.ESP_DEJA_PIZZA,pizza.toString());
 		try {
 			sHuecos.acquire();
 			sExclusion.acquire();
@@ -27,7 +27,7 @@ public class Bandeja {
 	}
 
 	public static Pizza cogerPizza() {
-		Estadistica.setEstadoRepartidores(Estadistica.ESP_COGE_PIZZA);
+		Estadistica.setEstadoRepartidores(Estadistica.ESP_COGE_PIZZA,"");
 		Pizza p = null;
 		try {
 			sElementos.acquire();
@@ -50,7 +50,7 @@ public class Bandeja {
 		String p="";
 		for (Pizza pizza : pizzas) {
 			if (pizza!=null)
-			p+=pizza;
+			p+=pizza+", ";
 		}
 		Estadistica.setBandeja(p);
 	}

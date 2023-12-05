@@ -1,4 +1,4 @@
-package reto7_2a.a;
+package reto7_2a.b;
 
 import java.util.Iterator;
 
@@ -57,7 +57,7 @@ public class Estadistica {
 	 * Impime la estadistica segun los datos actuales
 	 */
 	synchronized public static void imprimirEstadistica() {
-		System.out.println("\n\n\n\n\n\nRETO 7 2A A\n######################################################################");
+		System.out.println("\n\n\n\n\n\nRETO 7 2A B\n######################################################################");
 		System.out.println("Pedidos: "+pedidos);
 		System.out.println();
 		System.out.println("COCINEROS:");

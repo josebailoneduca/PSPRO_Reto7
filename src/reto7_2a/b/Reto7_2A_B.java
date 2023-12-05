@@ -1,4 +1,4 @@
-package reto7_2a.a;
+package reto7_2a.b;
 
 /**
  * 2 a). Cocineros y repartidores. 
@@ -9,7 +9,7 @@ package reto7_2a.a;
  * por una nueva pizza en la bandeja. Como añadido, la bandeja tiene una capacidad 
  * limitada: no puede haber mas de MAX pizzas pendientes de reparto.
  */
-public class Reto7_2_A_A {
+public class Reto7_2A_B {
 
 	public static void main(String[] args) {
 		Cocinero[] cocineros = new Cocinero[Config.N_COCINEROS];

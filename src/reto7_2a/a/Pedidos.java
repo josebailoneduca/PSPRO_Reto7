@@ -22,7 +22,7 @@ public class Pedidos {
 		
 	}
 	public static Pedido cogerPedido() {
-		Estadistica.setEstadoCocinero(Estadistica.ESP_COGE_PEDIDO);
+		Estadistica.setEstadoCocinero(Estadistica.ESP_COGE_PEDIDO,"");
 		Pedido pedido=null;
 		try {
 			elementos.acquire();
@@ -39,7 +39,7 @@ public class Pedidos {
 	private static void mandarEstadistica() {
 		String p="";
 		for (Pedido pedido : pedidos) {
-			p+=pedido;
+			p+=pedido+", ";
 		}
 		Estadistica.setPedidos(p);
 	}

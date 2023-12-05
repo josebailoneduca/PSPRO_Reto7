@@ -1,4 +1,4 @@
-package reto7_2a.a;
+package reto7_2a.b;
 
 public class Config {
 	public static int TAMANO_BANDEJA=4;

@@ -1,4 +1,4 @@
-package reto7_2a.a;
+package reto7_2a.b;
 
 import java.util.Random;
 
