@@ -14,5 +14,11 @@ public class Pizza {
 	
 	public String getNombre() {
 		return nombre;
+	}
+	@Override
+	public String toString() {
+		return "Pizza " + id + "(" + nombre + "), ";
 	}	
+	
+	
 }

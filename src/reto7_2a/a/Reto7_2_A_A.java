@@ -12,14 +12,28 @@ package reto7_2a.a;
 public class Reto7_2_A_A {
 
 	public static void main(String[] args) {
-		Thread[] loros = new Thread[Config.N_LOROS];
+		Cocinero[] cocineros = new Cocinero[Config.N_COCINEROS];
+		Repartidor[] repartidores= new Repartidor[Config.N_REPARTIDORES];
 
-		for (int i = 0; i < loros.length; i++)
-			loros[i] = new Thread(new Loro(i));
-
-		for (int i = 0; i < loros.length; i++)
-			loros[i].start();
-
+		for (int i = 0; i < cocineros.length; i++)
+			cocineros[i] = new Cocinero(i);
+		for (int i = 0; i < repartidores.length; i++)
+			repartidores[i] = new Repartidor(i);
+ 
+		for (int i = 0; i < cocineros.length; i++)
+			new Thread(cocineros[i]).start();
+		for (int i = 0; i < repartidores.length; i++)
+			new Thread(repartidores[i]).start();
+ 
+		
+		
+		//GENERAR PEDIDOS
+		
+		new GeneradorPedidos();
+			
+		
+		
+		
 	}
 
 }

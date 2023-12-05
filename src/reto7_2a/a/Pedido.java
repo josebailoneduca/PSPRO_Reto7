@@ -18,4 +18,10 @@ public class Pedido {
 		return pizza;
 	}
 
+	@Override
+	public String toString() {
+		return "Pedido "+ id + "(" + pizza + "), ";
+	}
+
+	
 }
