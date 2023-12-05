@@ -30,20 +30,22 @@ public class Estadistica {
 
 
 	
-	public static void setEstadoCocinero (int id, int estado) {
-		estadoCocineros[id]=estado;
+	public static void setEstadoCocinero (int estado) {
+		estadoCocineros[((Cocinero)Thread.currentThread()).getIndice()]=estado;
 		imprimirEstadistica();
 	}
-	public static void setEstadoRepartidores (int id, int estado) {
-		estadoRepartidores[id]=estado;
+	public static void setEstadoRepartidores (int estado) {
+		estadoRepartidores[((Repartidor)Thread.currentThread()).getIndice()]=estado;
 		imprimirEstadistica();
 	}
 	
 	public static void setPedidos(String p) {
 		pedidos=p;
+		imprimirEstadistica();
 	}
 	public static void setBandeja(String b) {
 		bandeja=b;
+		
 	}
  
  

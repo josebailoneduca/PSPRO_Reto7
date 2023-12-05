@@ -2,11 +2,11 @@ package reto7_2a.a;
 
 import java.util.Random;
 
-public class Repartidor implements Runnable {
+public class Repartidor extends Thread{
 	
-	private int id;
-	public Repartidor(int id) {
-		this.id=id;
+	private int indice;
+	public Repartidor(int indice) {
+		this.indice=indice;
 		}
 	@Override
 	public void run() {
@@ -16,9 +16,14 @@ public class Repartidor implements Runnable {
 		
 	}
 	private void repartirPizza(Pizza pizza) {
+		Estadistica.setEstadoRepartidores(Estadistica.REPARTIENDO);
 		try {
-			Thread.currentThread().sleep(new Random().nextInt(Config.MIN_COCINAR,Config.MAX_COCINAR));
+			Thread.currentThread().sleep(new Random().nextInt(Config.MIN_REPARTIR,Config.MAX_REPARTIR));
 		} catch (InterruptedException e) {}
 	}
+	public int getIndice() {
+		return indice;
+	}
 
+	
 }

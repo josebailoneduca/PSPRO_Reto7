@@ -2,12 +2,12 @@ package reto7_2a.a;
 
 import java.util.Random;
 
-public class Cocinero implements Runnable{
-private int id;
+public class Cocinero extends Thread{
+private int indice;
 
 	
-	public Cocinero(int id) {
-	this.id = id;
+	public Cocinero(int indice) {
+	this.indice = indice;
 }
 
 
@@ -22,6 +22,7 @@ private int id;
 
 
 	private Pizza cocinar(Pedido pedido) {
+		Estadistica.setEstadoCocinero(Estadistica.COCINANDO);
 		try {
 			Thread.currentThread().sleep(new Random().nextInt(Config.MIN_COCINAR,Config.MAX_COCINAR));
 		} catch (InterruptedException e) {}
@@ -29,8 +30,8 @@ private int id;
 	}
 
 
-	public int getId() {
-		return id;
+	public int getIndice() {
+		return indice;
 	}
 
 }

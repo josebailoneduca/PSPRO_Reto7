@@ -8,6 +8,7 @@ public class GeneradorPedidos {
 	public GeneradorPedidos() {
 		while (true) {
 			Pedidos.agregarPedido(crearPedido());
+
 			try {
 				Thread.currentThread().sleep(Config.MIN_CREA_PEDIDO,Config.MAX_CREA_PEDIDO);
 			} catch (InterruptedException e) {

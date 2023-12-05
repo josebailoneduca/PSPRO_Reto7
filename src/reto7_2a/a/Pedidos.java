@@ -13,6 +13,7 @@ public class Pedidos {
 		try {
 			exclusion.acquire();
 			pedidos.add(pedido);
+			mandarEstadistica();
 			exclusion.release();
 			elementos.release();
 		} catch (InterruptedException e) {
@@ -21,11 +22,13 @@ public class Pedidos {
 		
 	}
 	public static Pedido cogerPedido() {
+		Estadistica.setEstadoCocinero(Estadistica.ESP_COGE_PEDIDO);
 		Pedido pedido=null;
 		try {
 			elementos.acquire();
 			exclusion.acquire();
 			pedido = pedidos.removeFirst();
+			mandarEstadistica();
 			exclusion.release();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -34,10 +37,10 @@ public class Pedidos {
 	}
 	
 	private static void mandarEstadistica() {
-		String s="";
+		String p="";
 		for (Pedido pedido : pedidos) {
-			s+=pedido;
+			p+=pedido;
 		}
-		Estadistica.setBandeja(s);
+		Estadistica.setPedidos(p);
 	}
 }

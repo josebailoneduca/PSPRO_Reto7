@@ -21,9 +21,9 @@ public class Reto7_2_A_A {
 			repartidores[i] = new Repartidor(i);
  
 		for (int i = 0; i < cocineros.length; i++)
-			new Thread(cocineros[i]).start();
+			cocineros[i].start();
 		for (int i = 0; i < repartidores.length; i++)
-			new Thread(repartidores[i]).start();
+			repartidores[i].start();
  
 		
 		
