@@ -6,6 +6,9 @@ import java.util.concurrent.Semaphore;
 public class Bandeja {
 
 	private static LinkedBlockingDeque<Pizza> pizzas = new LinkedBlockingDeque<Pizza>(Config.TAMANO_BANDEJA);
+	
+	
+	
 	public static void ponerPizza(Pizza pizza) {
   		Estadistica.setEstadoCocinero(Estadistica.ESP_DEJA_PIZZA,pizza.toString());
 			try {
@@ -16,16 +19,23 @@ public class Bandeja {
 			mandarEstadistica();
 	}
 
+	
+	
 	public static Pizza cogerPizza() {
 		Estadistica.setEstadoRepartidores(Estadistica.ESP_COGE_PIZZA,"");
 			Pizza p = null;
-			do {
-				try {
-					p=pizzas.take();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} while (p==null);
+//			do {
+//				try {
+					try {
+						p=pizzas.take();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			} while (p==null);
 			mandarEstadistica();
 
 		return p;
