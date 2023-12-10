@@ -1,4 +1,4 @@
-package reto7_6A.b;
+package reto7_6b.a;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.Random;
  * 
  * @author Jose Javier Bailon Ortiz
  */
-public class Reto7_6A_B {
+public class Reto7_6B_A {
 	
 
 	
@@ -79,7 +79,7 @@ public class Reto7_6A_B {
 		// Mostrar informe de resultado de los datos almacenados en la base de datos
 		List<Integer> tuplas = bd.getTodasLasTuplas();
 		System.out.println("************************************");
-		System.out.println("RETO 7 6A B");
+		System.out.println("RETO 7 6B A");
 		System.out.println("Contenido de la base de datos. Ruta: "+bd.getRuta());
 		System.out.println("************************************");
 		System.out.println(tuplas);

@@ -1,4 +1,4 @@
-package reto7_6A.a;
+package reto7_6b.a;
 
 import java.io.EOFException;
 import java.io.File;
@@ -25,20 +25,9 @@ import java.util.concurrent.Semaphore;
  * @author Jose Javier Bailon Ortiz
  */
 public class BaseDatos {
-	/**
-	 * lectores activos
-	 */
-	private int numeroLectores = 0;
 
-	/**
-	 * Semaforo lectores
-	 */
-	private Semaphore lectores;
-	/**
-	 * Semaforo escritores
-	 */
-	private Semaphore escritores;
-
+	Semaphore sLP, sEP, sEEX, sCEX;
+	int la, ll, ea, ee;
 
 	/**
 	 * Cantidad de tuplas de la base de datos
@@ -59,8 +48,14 @@ public class BaseDatos {
 	public BaseDatos(String ruta, int numeroTuplas) {
 		
 		//inicializar valores
-		this.lectores = new Semaphore(1, true);
-		this.escritores = new Semaphore(1,true);
+		la = 0;
+		ll = 0;
+		ea = 0;
+		ee = 0;
+		sLP = new Semaphore(0);
+		sEP = new Semaphore(0);
+		sEEX = new Semaphore(1);
+		sCEX = new Semaphore(1);
 		this.f = new File(ruta);
 		this.numeroTuplas = numeroTuplas;
 		
@@ -78,20 +73,13 @@ public class BaseDatos {
 	 * @param id Id de la tupla a editar
 	 */
 	public void update(int id) {
-		//escritores esperan
-		try {
-			escritores.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
+		 
+		adquirir_escritor();
 		//escritura a base de datos
 		//>>seccion critica
 		escribirADisco(id);
 		//<<fin seccion critica
-		
-		//liberacion de nuevo escritor
-		escritores.release();
+		liberar_escritor();
 	}
 
 	/**
@@ -104,50 +92,99 @@ public class BaseDatos {
 	 * @return El valor de la tupla
 	 */
 	public int select(int id) {
- 		//lectores esperan
-		try {
-			lectores.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		//registrar lector activo
-		numeroLectores++;
-		//bloquear escritores si se es el primer lector
-		if (numeroLectores == 1) {
-			try {
-				escritores.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		//liberacion de un lector
-		lectores.release();
-
+ 		 adquirir_lector();
 		//lectura de la base de datos
 		//>>seccion critica
 		int leido = leerDeDisco(id);
 		//<<fin seccion critica
 
-		//letores esperan
-		try {
-			lectores.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		//decrementar el nuemro de lectores activos
-		numeroLectores--;
 
-		//si no quedan lectores se da paso a los escritores
-		if (numeroLectores == 0)
-			escritores.release();
-		//liberar lector
-		lectores.release();
-		
+		liberar_lector();
 		//devolver valor leido
 		return leido;
 	}
 
+	
+	
+	
+	
+	
+	public void adquirir_lector() {
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		la++;
+		if (ea == 0) {
+			ll++;
+			sLP.release();
+		}
+		sCEX.release();
+		try {
+			sLP.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void liberar_lector() {
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ll--;
+		la--;
+		if (ll==0) 
+			while(ee<ea) {
+				ee++;
+				sEP.release();
+			}
+		sCEX.release();
+	}
+	
+	public void adquirir_escritor()  {
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ea++;
+		if (ll==0) {
+			ee++;
+			sEP.release();
+		}
+		sCEX.release();
+		try {
+			sEP.acquire();
+			sEEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void liberar_escritor() {
+		sEEX.release();
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ee--;
+		ea--;
+		if (ea==0) {
+			while(ll<la) {
+				ll++;
+				sLP.release();
+			}
+		}
+		sCEX.release();
+	}
+	
+	
+	
+	
 	/**
 	 * Devuelve el numero de tuplas disponibles en la base de datos
 	 * 

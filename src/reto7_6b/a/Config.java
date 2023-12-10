@@ -1,4 +1,4 @@
-package reto7_6A.a;
+package reto7_6b.a;
 
 public class Config {
 	/**
