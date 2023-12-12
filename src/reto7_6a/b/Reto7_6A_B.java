@@ -12,7 +12,7 @@ import java.util.Random;
 *    esperar a que la BD quede libre.
 *  • Mientras un escritor está trabajando con la BD, no puede haber ningún otro proceso
 *    trabajando (ni lector ni escritor).
-* a). Un lector puede entrar en cuanto sea posible. 
+* a). Un lector puede entrar en cuanto sea posible. (PRIORIDAD LECTURA)
 
  * 
  * @author Jose Javier Bailon Ortiz

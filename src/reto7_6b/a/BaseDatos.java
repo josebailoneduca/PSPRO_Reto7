@@ -15,19 +15,27 @@ import java.util.concurrent.Semaphore;
  * de una de las posiciones guardadas o que incremente en 1 el valor de alguna
  * de las posiciones de archivo.
  * 
- * Controla el acceso con un algoritmo de lector escritor de W. Stallins con 
- * prioridad para los lectores.
+ * Controla el acceso con un algoritmo de lector escritor de J. Bacon con 
+ * prioridad para los escritores.
  * 
- * Varios lectores puede acceder simultaneamente pero cuando un escritor tiene
- * el acceso nadie puede acceder. Este comportamiento esta implementado con
- * semaforos. 
+ * En cuanto hay un escritor esperando tiene prioridad sobre el resto de lectores. 
+ * Este comportamiento esta implementado con semaforos. 
  * 
  * @author Jose Javier Bailon Ortiz
  */
 public class BaseDatos {
 
-	Semaphore sLP, sEP, sEEX, sCEX;
-	int la, ll, ea, ee;
+	//semaforos
+	Semaphore sLP; //lecturas pendientes
+	Semaphore sEP; //escrituras pendientes
+	Semaphore sEEX;//escritura esclusiva
+	Semaphore sCEX;//mutex para acceso a contadores
+	
+	//contadores
+	int la;
+	int ll;
+	int ea;
+	int ee;
 
 	/**
 	 * Cantidad de tuplas de la base de datos
@@ -109,7 +117,7 @@ public class BaseDatos {
 	
 	
 	
-	public void adquirir_lector() {
+	private void adquirir_lector() {
 		try {
 			sCEX.acquire();
 		} catch (InterruptedException e) {
@@ -128,7 +136,7 @@ public class BaseDatos {
 		}
 	}
 	
-	public void liberar_lector() {
+	private void liberar_lector() {
 		try {
 			sCEX.acquire();
 		} catch (InterruptedException e) {
@@ -144,7 +152,7 @@ public class BaseDatos {
 		sCEX.release();
 	}
 	
-	public void adquirir_escritor()  {
+	private void adquirir_escritor()  {
 		try {
 			sCEX.acquire();
 		} catch (InterruptedException e) {
@@ -164,7 +172,7 @@ public class BaseDatos {
 		}
 	}
 	
-	public void liberar_escritor() {
+	private void liberar_escritor() {
 		sEEX.release();
 		try {
 			sCEX.acquire();

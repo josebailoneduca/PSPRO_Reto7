@@ -3,9 +3,17 @@ package reto7_6b.a;
 import java.util.concurrent.Semaphore;
 
 public class Algoritmo {
-
-	Semaphore sLP, sEP, sEEX, sCEX;
-	int la, ll, ea, ee;
+	//semaforos
+	Semaphore sLP; //lecturas pendientes
+	Semaphore sEP; //escrituras pendientes
+	Semaphore sEEX;//escritura esclusiva
+	Semaphore sCEX;//mutex para acceso a contadores
+	
+	//contadores
+	int la;
+	int ll;
+	int ea;
+	int ee;
 
 	public Algoritmo() {
 		la = 0;

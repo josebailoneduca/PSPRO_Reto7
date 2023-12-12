@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 
-/**
-* Lectores y escritores en BD.
-*  • Puede haber varios lectores trabajando concurrentemente.
-*  • Si un escritor intenta acceder a la BD mientras hay lectores trabajando, el escritor debe
-*    esperar a que la BD quede libre.
-*  • Mientras un escritor está trabajando con la BD, no puede haber ningún otro proceso
-*    trabajando (ni lector ni escritor).
-* a). Un lector puede entrar en cuanto sea posible. 
+ /**
+ * Lectores y escritores en BD.
+ *  • Puede haber varios lectores trabajando concurrentemente.
+ *  • Si un escritor intenta acceder a la BD mientras hay lectores trabajando, el escritor debe
+ *    esperar a que la BD quede libre.
+ *  • Mientras un escritor está trabajando con la BD, no puede haber ningún otro proceso
+ *    trabajando (ni lector ni escritor).
+ *    
+ * B). En cuanto haya un escritor esperando a entrar en la BD, los lectores que vayan llegando nuevos
+ *     deben esperar, incluso si solo hay lectores trabajando en la BD.(PRIORIDAD ESCRITURA) 
 
+* 
  * 
  * @author Jose Javier Bailon Ortiz
  */
