@@ -6,7 +6,7 @@ public class Recurso {
 	int nB = 0;
 
 	public synchronized void usarA() {
-		while (nB - 2 * (nA + 1) <0 || nA+nB==Config.N_EN_RECURSO)
+		while (nB - 2 * (nA + 1) <0 || nA+nB==Config.N_MAX_EN_RECURSO)
 			try {
 				Estadistica.nA=nA;
 				Estadistica.nB=nB;
@@ -24,7 +24,7 @@ public class Recurso {
 	}
 
 	public synchronized void usarB() {
-		while (nA+nB==Config.N_EN_RECURSO)
+		while (nA+nB==Config.N_MAX_EN_RECURSO)
 			try {
 				Estadistica.nA=nA;
 				Estadistica.nB=nB;
