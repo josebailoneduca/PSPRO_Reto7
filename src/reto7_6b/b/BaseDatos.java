@@ -1,6 +1,4 @@
-package reto7_6b.a;
-
-
+package reto7_6b.b;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,27 +14,43 @@ import java.util.concurrent.Semaphore;
  * de una de las posiciones guardadas o que incremente en 1 el valor de alguna
  * de las posiciones de archivo.
  * 
- * Controla el acceso con un algoritmo de lector escritor de J. Bacon con 
- * prioridad para los escritores.
+ * Controla el acceso con monitor. Los lectores y escritores piden paso para hacer su operacion y sera dado en funcion de lo siguiente:
+ * Los escritores son contabilizados conforme entran a pedir paso y son descontabilizados cuando terminan su accion.
+ * Los lectores son contabilizados conforme adquieren el paso y son descontabilizados cuando terminan su accion.
+
+ * Cuando entra un lector a pedir paso si encuentra un numero de escritores contabilizados mayor que cero entra en espera hasta que se rompa esa condicion.
+ * Cuando entra un escritor a pedir paso si encuentra la lectura o la escritura activa espera hasta que se rompa esa condicion.
+
+ * Cuando un escritor ha obtenido el paso marca la escritura como activa.
+ * Cuando un lector ha obtenido el paso marca la lectura como activa y es contabilizado.
  * 
- * En cuanto hay un escritor esperando tiene prioridad sobre el resto de lectores. 
- * Este comportamiento esta implementado con semaforos. 
+ * Cuando un escritor termina su accion desactiva el estado de escritura y notifica a los hilos en espera.
+ * Cuando un lector termina su accion, si es el ultimo lector contabilizado desactiva el estado de escritura. Siempre notifica a los hilos en espera.
+ * 
+ * El resultado es que que se puede producir varias lecturas o una escritura de manera simultanea y en cuanto hay un escritor esperando 
+ * tiene prioridad sobre el resto de lectores y pasa en cuanto no haya nadie en el proceso de lectura ni escritura
  * 
  * @author Jose Javier Bailon Ortiz
  */
 public class BaseDatos {
 
-	//semaforos
-	Semaphore sLP; //lecturas pendientes
-	Semaphore sEP; //escrituras pendientes
-	Semaphore sEEX;//escritura esclusiva
-	Semaphore sCEX;//mutex para acceso a contadores
-	
 	//contadores
-	int la;
-	int ll;
-	int ea;
-	int ee;
+	/**
+	 * Numero de escritores en cola
+	 */
+	int ne;
+	/**
+	 * Numero de lectores leyendo
+	 */
+	int nll; 
+	/**
+	 * Escritura produciendose
+	 */
+	boolean escrituraActiva; 
+	/**
+	 * Lectura produciendose
+	 */
+	boolean lecturaActiva; 
 
 	/**
 	 * Cantidad de tuplas de la base de datos
@@ -57,14 +71,10 @@ public class BaseDatos {
 	public BaseDatos(String ruta, int numeroTuplas) {
 		
 		//inicializar valores
-		la = 0;
-		ll = 0;
-		ea = 0;
-		ee = 0;
-		sLP = new Semaphore(0);
-		sEP = new Semaphore(0);
-		sEEX = new Semaphore(1);
-		sCEX = new Semaphore(1);
+		ne=0;
+		nll=0;
+		escrituraActiva=false;
+		lecturaActiva=false;
 		this.f = new File(ruta);
 		this.numeroTuplas = numeroTuplas;
 		
@@ -102,7 +112,8 @@ public class BaseDatos {
 	 */
 	public int select(int id) {
  		 adquirir_lector();
-		//lectura de la base de datos
+		
+ 		 //lectura de la base de datos
 		//>>seccion critica
 		int leido = leerDeDisco(id);
 		//<<fin seccion critica
@@ -117,78 +128,58 @@ public class BaseDatos {
 	
 	
 	
-	
-	private void adquirir_lector() {
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		la++;
-		if (ea == 0) {
-			ll++;
-			sLP.release();
-		}
-		sCEX.release();
-		try {
-			sLP.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void liberar_lector() {
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ll--;
-		la--;
-		if (ll==0) 
-			while(ee<ea) {
-				ee++;
-				sEP.release();
+	/**
+	 * Comprobar si hay escritores registrados. Si los hay espera.
+	 * En cuanto no haya escritores registrados se pasa. Se contabiliza
+	 * el lector y se marca la lectura como activa.
+	 *  
+	 */
+	private synchronized void adquirir_lector() {
+		while (ne>0)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		sCEX.release();
+		
+		nll++;
+		lecturaActiva=true;
 	}
 	
-	private void adquirir_escritor()  {
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ea++;
-		if (ll==0) {
-			ee++;
-			sEP.release();
-		}
-		sCEX.release();
-		try {
-			sEP.acquire();
-			sEEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	/**
+	 * Descuenta el lector y si es el ultimo de los que hay leyendo desactiva
+	 * el estado de lectura activa
+	 */
+	private synchronized void liberar_lector() {
+		if (--nll==0)
+			lecturaActiva=false;
+		notifyAll();
 	}
 	
-	private void liberar_escritor() {
-		sEEX.release();
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ee--;
-		ea--;
-		if (ea==0) {
-			while(ll<la) {
-				ll++;
-				sLP.release();
+	/**
+	 * Contabiliza un nuevo escritor y lo hace esperar
+	 * hasta que no haya ni escritura ni lectura activa.
+	 * En cuanto obtiene el paso marca la escritura como activa
+	 */
+	private synchronized void adquirir_escritor()  {
+		ne++;
+		while (escrituraActiva || lecturaActiva)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		}
-		sCEX.release();
+		escrituraActiva=true;
+	}
+	
+	
+	/**
+	 * Decuenta el escritor y marca la escritura como no activa
+	 */
+	private synchronized void liberar_escritor() {
+		ne--;
+		escrituraActiva=false;
+		notifyAll();
 	}
 	
 	
