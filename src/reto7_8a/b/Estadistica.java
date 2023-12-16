@@ -10,7 +10,6 @@ public class Estadistica {
 	private static int mafiosoPasta =0;
 	private static int mafiosoTomate =0;
 	private static int mafiosoQueso =0;
-	private static int proveedor=0;
 	private static Ingrediente ing1;
 	private static Ingrediente ing2;
 
@@ -34,7 +33,7 @@ public class Estadistica {
 		System.out.println("Mafioso pasta: "+etiquetas[mafiosoPasta]);
 		System.out.println("Mafioso tomate: "+etiquetas[mafiosoTomate]);
 		System.out.println("Mafioso queso: "+etiquetas[mafiosoQueso]);
-		System.out.println("Ultimos ingredientes puesto en la mesa:" + ing1+" , "+ ing2 );
+		System.out.println("Ultimos ingredientes puestos en la mesa:" + ing1+" , "+ ing2 );
 	}
 }
 

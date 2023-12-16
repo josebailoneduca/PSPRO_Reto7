@@ -24,6 +24,7 @@ public class Mesa {
 			barreraSalida();
 			return false;
 		}else if (ing1!=falta && ing2!=falta) {
+			ing1=ing2=null;
 			return true;
 		}else {
 			barreraSalida();
