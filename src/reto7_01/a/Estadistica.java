@@ -4,19 +4,41 @@ import java.util.Iterator;
 
 
 /**
- * Imprime estadisticas en pantalla sobre la actividad de los filosofos y la pertenencia de los tenedores
+ * Imprime estadisticas en pantalla sobre la actividad del sistema.
+ * Las referencias a esta clase en el resto de clases son con motivo
+ * exclusivo de monitorear el estado y no intervienen en la resolucion 
+ * del problema
  */
 public class Estadistica {
 	
+	/**
+	 * Estado comiendo
+	 */
 	public static final int COMIENDO=0;
+	
+	/**
+	 * Estado esperando columpio
+	 */
 	public static final int ESPERA_COLUMPIO=1;
+	
+	/**
+	 * Estado columpiandose
+	 */
 	public static final int COLUMPIANDOSE=2;
+	
+	/**
+	 * Estado esperando para comer
+	 */
 	public static final int ESPERA_COMER=3;
 	
 	/**
 	 * etiquetas de los estados
 	 */
 	private static final String[] etiquetas= {"comiendo >>>>>>>>>","esp.columpio","columpiandose ---------","esp.comer"};
+	
+	
+	
+	
 	
 	/**
 	 * estado actual de los loros
@@ -47,7 +69,11 @@ public class Estadistica {
  
 
 
-	
+	/**
+	 * Define el estado para un loro
+	 * @param id Id del loro
+	 * @param estado Estado a establecer 
+	 */
 	public static void setEstado (int id, int estado) {
 		estadoLoros[id]=estado;
 		imprimirEstadistica();
@@ -83,7 +109,7 @@ public class Estadistica {
 	/**
 	 * Impime la estadistica segun los datos actuales
 	 */
-	synchronized public static void imprimirEstadistica() {
+	synchronized private static void imprimirEstadistica() {
 		System.out.println("\n\n\n\n\n\nRETO 7 1 A\n######################################################################");
 		System.out.println(String.format("Loro\tM. Esp. Comida\t N comido \tM. Esp. Colump \t N colump \t Estado"));
 		for (int i = 0; i < estadoLoros.length; i++) {
@@ -101,6 +127,4 @@ public class Estadistica {
 		}
 		
 	}
-	
-	
 }

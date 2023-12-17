@@ -8,9 +8,24 @@ import java.util.Iterator;
  */
 public class Estadistica {
 	
+	/**
+	 * Estado comiendo
+	 */
 	public static final int COMIENDO=0;
+	
+	/**
+	 * Estado esperando columpio
+	 */
 	public static final int ESPERA_COLUMPIO=1;
+	
+	/**
+	 * Estado columpiandose
+	 */
 	public static final int COLUMPIANDOSE=2;
+	
+	/**
+	 * Estado esperando para comer
+	 */
 	public static final int ESPERA_COMER=3;
 	
 	/**
@@ -101,6 +116,4 @@ public class Estadistica {
 		}
 		
 	}
-	
-	
 }

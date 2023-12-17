@@ -1,4 +1,4 @@
-package reto7_01.a;
+package reto7_01.b;
 
 
 
@@ -9,7 +9,7 @@ package reto7_01.a;
  * Pero se encuentran con el inconveniente de que sólo tres de ellos pueden comer del plato al 
  * mismo tiempo y que en el columpio solo cabe un pájaro. 
  */
-public class Reto7_1A {
+public class Reto7_1_B {
 
 	public static void main(String[] args) {
 		Thread[] loros = new Thread[Config.N_LOROS];
