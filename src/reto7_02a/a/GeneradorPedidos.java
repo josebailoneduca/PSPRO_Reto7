@@ -2,9 +2,27 @@ package reto7_02a.a;
 
 import java.util.Random;
 
+
+/**
+ * Genera pedidos aleatorios en un bucle infinito esperando un tiempo entre pedidos.
+ * Tras generar un pedido lo agrega al buffer de Pedidos
+ *  
+ * @author Jose Javier Bailon Ortiz
+ */
 public class GeneradorPedidos {
-	int ultimoPedido=0;
-	String [] nombres= {"Carbonara","Cuatro estaciones","Napolitana","Cuatro quesos", "De Peperoni", "Marinara", "Siciliana", "Margarita"};
+	/**
+	 * Id del ultimpo pedido
+	 */
+	private int ultimoPedido=0;
+	
+	/**
+	 * Tipos de pizza disponibles
+	 */
+	private String [] nombres= {"Carbonara","Cuatro estaciones","Napolitana","Cuatro quesos", "De Peperoni", "Marinara", "Siciliana", "Margarita"};
+	
+	/**
+	 * Constructor. Inicia el bucle de crear pedido>agregar al buffer>esperar
+	 */
 	public GeneradorPedidos() {
 		while (true) {
 			Pedidos.agregarPedido(crearPedido());
@@ -16,6 +34,12 @@ public class GeneradorPedidos {
 			}
 		}
 	}
+	
+	/**
+	 * Crea un pedido 
+	 * 
+	 * @return El pedido creado
+	 */
 	private Pedido crearPedido() {
 		ultimoPedido++;
 		return new Pedido(ultimoPedido, nombres[new Random().nextInt(0,nombres.length)]);

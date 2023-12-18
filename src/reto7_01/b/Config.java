@@ -2,6 +2,8 @@ package reto7_01.b;
 
 /**
  * Configuracion
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Config {
 	/**

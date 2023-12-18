@@ -1,8 +1,14 @@
 package reto7_02a.b;
 
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.Semaphore;
 
+
+/**
+ * Buffer para pasar las pizzas desde los cocineros a los repartidores.
+ * Esta construido con una LinkedBlockingDeque de longitud finita
+ *  
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Bandeja {
 
 	private static LinkedBlockingDeque<Pizza> pizzas = new LinkedBlockingDeque<Pizza>(Config.TAMANO_BANDEJA);

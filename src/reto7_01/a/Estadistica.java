@@ -8,6 +8,8 @@ import java.util.Iterator;
  * Las referencias a esta clase en el resto de clases son con motivo
  * exclusivo de monitorear el estado y no intervienen en la resolucion 
  * del problema
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Estadistica {
 	

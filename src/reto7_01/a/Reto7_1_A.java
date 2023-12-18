@@ -8,7 +8,9 @@ package reto7_01.a;
  * Crea un hilo por loro y lo lanza.
  * 
  * La solucion esta implementada con semaforos los cuales representan
- * las plazas disponibles para comer y columpiarse-
+ * las plazas disponibles para comer y columpiarse
+ * 
+ * @author Jose Javier Bailon Ortiz
  * 
  */
 public class Reto7_1_A {

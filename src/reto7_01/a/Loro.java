@@ -6,6 +6,8 @@ import java.util.Random;
 /**
  * Implementa el comportamiento de un loro.
  * Va adquieriendo el acceso a la comida y al columpio en un bucle infinito
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Loro implements Runnable {
 
@@ -37,7 +39,7 @@ public class Loro implements Runnable {
 	}
 
 	/**
-	 * Define el proceso de ciner. Adquiere el semaforo de acceso a la comida. 
+	 * Define el proceso de comer. Adquiere el semaforo de acceso a la comida. 
 	 * Tras obtenerlo se hace una espera y despues se libera la plaza 
 	 * de la comida
 	 */
@@ -57,6 +59,8 @@ public class Loro implements Runnable {
 		
 		
 	}
+	
+	
 	/**
 	 * Define el proceso de columpiarse. Adquiere el semaforo de acceso al columpio. 
 	 * Tras obtenerlo se hace una espera y despues se libera la plaza 

@@ -2,6 +2,8 @@ package reto7_01.b;
 
 /**
  * Monitor de acceso a la comida
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Comida {
 	/**

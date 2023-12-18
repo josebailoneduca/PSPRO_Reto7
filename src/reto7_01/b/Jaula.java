@@ -5,6 +5,8 @@ import java.util.concurrent.Semaphore;
 /**
  * Esta clase representa la jaula, contiene los accesos a la comida y  
  * al columpio representados por dos monitores
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Jaula {
 	/**

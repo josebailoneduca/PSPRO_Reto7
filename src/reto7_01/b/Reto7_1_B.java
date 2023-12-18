@@ -3,11 +3,15 @@ package reto7_01.b;
 
 
 /**
- * 1 En una pajarería están teniendo problemas para tener a todos sus loros felices. Los loros 
- * comparten una jaula en la que hay un plato con comida y un columpio para hacer ejercicio. Todos 
- * los loros repiten la misma rutina una y otra vez: primero comen del plato y después se columpian. 
- * Pero se encuentran con el inconveniente de que sólo tres de ellos pueden comer del plato al 
- * mismo tiempo y que en el columpio solo cabe un pájaro. 
+ * Clase main del ejercicio Reto7_1 solucion B
+ * 
+ * Crea un hilo por loro y lo lanza.
+ * 
+ * La solucion esta implementada con monitores que controlan el acceso
+ * a la comida y el columpio
+ * 
+ * @author Jose Javier Bailon Ortiz
+ * 
  */
 public class Reto7_1_B {
 

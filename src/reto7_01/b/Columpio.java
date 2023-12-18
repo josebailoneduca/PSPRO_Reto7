@@ -2,6 +2,8 @@ package reto7_01.b;
 
 /**
  * Monitor de acceso al columpio
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Columpio {
 	/**
