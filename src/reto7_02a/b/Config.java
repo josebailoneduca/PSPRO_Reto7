@@ -17,12 +17,12 @@ public class Config {
 	/**
 	 * Cantidad de hilos repartidores
 	 */
-	public static int N_REPARTIDORES=4;
+	public static int N_REPARTIDORES=3;
 	
 	/**
 	 * Cantidad de hilos cocineros
 	 */
-	public static int N_COCINEROS=4;
+	public static int N_COCINEROS=3;
 	
 	/**
 	 * Tiempo minimo de creacion de un pedido
@@ -32,7 +32,7 @@ public class Config {
 	/**
 	 * Tiempo maximo de creacion de un pedido
 	 */
-	public static final int MAX_CREA_PEDIDO=1500;
+	public static final int MAX_CREA_PEDIDO=1000;
 	
 	/**
 	 * Tiempo minimo de cocinado de pizza
@@ -42,7 +42,7 @@ public class Config {
 	/**
 	 * Tiempo maximo de cocinado de pizza
 	 */
-	public static final int MAX_COCINAR=4000;
+	public static final int MAX_COCINAR=3000;
 	
 	/**
 	 * Tiempo minimo empleado para repartir
@@ -52,7 +52,7 @@ public class Config {
 	/**
 	 * Tiempo maximo empleado para repartir
 	 */
-	public static final int MAX_REPARTIR=4000;
+	public static final int MAX_REPARTIR=5000;
 	
 
 	

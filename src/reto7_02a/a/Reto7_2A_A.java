@@ -1,6 +1,5 @@
 package reto7_02a.a;
 
-import reto7_02a.b.GeneradorPedidos;
 
 /**
  * <p>
