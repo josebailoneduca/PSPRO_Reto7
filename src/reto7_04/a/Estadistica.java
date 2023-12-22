@@ -1,18 +1,44 @@
 package reto7_04.a;
 
-public class Estadistica {
-	public static String[] estadoEmbotelladores=new String[Config.N_EMBOTELLADORES];
-	public static String estadoEmpaquetador="";
 
+/**
+ * Imprime en pantalla el estado del sistema
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
+public class Estadistica {
+	/**
+	 * Estado de los embotelladores
+	 */
+	private static String[] estadoEmbotelladores=new String[Config.N_EMBOTELLADORES];
+	
+	/**
+	 * Estado del empaquetador
+	 */
+	private static String estadoEmpaquetador="";
+
+	
+	/**
+	 * Define el estado de un embotellador
+	 * @param id Id del embotellador
+	 * @param estado El estado
+	 */
 	public static void setEmbotellador(int id,String estado) {
 		estadoEmbotelladores[id]=estado;
  			
 	}
 	
+	/**
+	 * Define el estado del empaquetador
+	 * @param estado El estado
+	 */
 	public static void setEmpaquetador(String estado) {
 		estadoEmpaquetador=estado;
  	}
 	
+	/**
+	 * Muestra el estado general del sistema
+	 */
 	public static void mostrarEstadistica() {
 		
 		System.out.println("\n".repeat(30));

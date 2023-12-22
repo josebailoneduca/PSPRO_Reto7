@@ -1,46 +1,87 @@
 package reto7_04.a;
 
 import java.util.Arrays;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Objeto caja con una capacidad determinada. Conforme se va lllenando el
+ * parametro capacidad desciende hasta llegar a 0 momento en el que se considera
+ * que esta llena.
+ * 
+ * Controla la modificacion concurrente de la capacidad con un ReentrantLock
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Caja {
+	
+	/**
+	 * Id de la caja
+	 */
 	private int id;
-  private int capacidad=Config.TAMANO_CAJA;
-  private int[] botellas=new int[Config.TAMANO_CAJA];
-  private ReentrantLock accesoBotellas = new ReentrantLock(true);
-  public Caja(int id) {
-	this.id = id;
-}
+	
+	/**
+	 * Capacidad restante de la caja
+	 */
+	private int capacidadDisponible = Config.TAMANO_CAJA;
+	
+	/**
+	 * Botellas que hay en la caja
+	 */
+	private int[] botellas = new int[Config.TAMANO_CAJA];
+	
+	/**
+	 * Lock de acceso a la modificacion de de capacidad disponible
+	 */
+	private ReentrantLock accesoBotellas = new ReentrantLock(true);
 
-public int getId() {
-	return id;
-}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param id Id de la caja
+	 */
+	public Caja(int id) {
+		this.id = id;
+	}
 
- 
+	/**
+	 * Devuelve la id de la caja
+	 * @return La id
+	 */
+	public int getId() {
+		return id;
+	}
 
-public boolean ponerBotella(int botella) {
-	  	try {
+	/**
+	 * Poner una botella en al caja
+	 * @param botella Botella a poner
+	 * 
+	 * @return True si queda espacio False si no queda
+	 */
+	public boolean ponerBotella(int botella) {
+		try {
 			accesoBotellas.lock();
-			botellas[capacidad-1]=botella;
-			capacidad--;
-		}finally {
+			botellas[capacidadDisponible - 1] = botella;
+			capacidadDisponible--;
+		} finally {
 			accesoBotellas.unlock();
 		}
-	  	return capacidad>0;
-  }
+		return capacidadDisponible > 0;
+	}
 
-@Override
-public String toString() {
-	return "Caja " + id;
-}
+	@Override
+	public String toString() {
+		return "Caja " + id;
+	}
 
-public String contenido() {
-	return "Caja " + id + ", botellas=" + Arrays.toString(botellas).replace(",0",",X");
+	/**
+	 * Devuelve un string con el estado de llenado de la caja
+	 * 
+	 * @return El string representando el estado de llenado
+	 */
+	public String contenido() {
+		return "Caja " + id + ", botellas=" + Arrays.toString(botellas).replace("0,", "X,");
 
-}
+	}
 
 }

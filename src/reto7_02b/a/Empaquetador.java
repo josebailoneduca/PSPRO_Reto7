@@ -3,6 +3,8 @@ package reto7_02b.a;
 /**
  * Recoje las cajas llenas de la Fabrica, las coloca en el Almacen de la Fabrica
  * y pone una nueva caja vacia para que el embotellador la llene
+ * Su carrera es un bucle infinito de retirar caja llena y poner caja vacia
+ * 
  * 
  * @author Jose Javier Bailon Ortiz
  */

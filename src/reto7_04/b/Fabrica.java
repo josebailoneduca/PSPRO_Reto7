@@ -2,6 +2,14 @@ package reto7_04.b;
 
 import java.util.LinkedList;
 
+
+/**
+ * Clase que controla el acceso a la caja vacia y el almacen donde se guardan las cajas llenas.
+ * Controla el acceso de los embotelladores y del empaquetador usando metodos sincronizados.
+ * Tambien controla la generacion de id para las botellas.
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Fabrica {
 	private Caja cajaParaLLenar = new Caja(0);
 	public LinkedList<Caja> almacen = new LinkedList<Caja>();
@@ -51,7 +59,7 @@ public class Fabrica {
 	}
 
 	/**
-	 * Poner una botella en una caja vacia
+	 * Poner una botella en una caja vacia. Espera si no hay caja o esta llena
 	 * 
 	 * @param botella La botella a poner
 	 */
@@ -69,15 +77,28 @@ public class Fabrica {
 		this.notifyAll();
 	}
 
+	/**
+	 * Devuele la caja para llenar
+	 * @return La caja
+	 */
 	public Caja getCajaParaLLenar() {
 		return cajaParaLLenar;
 	}
 
+	/**
+	 * Devuelve una nueva botella
+	 * 
+	 * @return La nueva botella
+	 */
 	synchronized public int getIdProximaBotella() {
-		
 		return idProximaBotella++;
 	}
 
+	/**
+	 * Devuelve la id de la proxima caja
+	 * 
+	 * @return La nueva botella
+	 */
 	public int getIdProximaCaja() {
 		return idProximaCaja++;
 	}

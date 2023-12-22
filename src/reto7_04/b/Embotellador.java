@@ -1,10 +1,31 @@
 package reto7_04.b;
 
+/**
+ * Productor de botellas. Las va colocando en la caja vacia.
+ * Tiene como carrera un bucle infinito de llenar botella y ponerla en la caja
+ * 
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Embotellador implements Runnable {
-	Fabrica fabrica;
-	int id;
+	
+	/**
+	 * Referencia a la fabrica
+	 */
+	private Fabrica fabrica;
+	
+	/**
+	 * Id del embotellador
+	 */
+	private int id;
 	
 	
+	/**
+	 * Constructor 
+	 * 
+	 * @param fabrica Referencia a la fabrica
+	 * @param id Identificador del embotellador
+	 */
 	public Embotellador(Fabrica fabrica,int id) {
 		this.fabrica = fabrica;
 		this.id=id;
@@ -24,18 +45,32 @@ public class Embotellador implements Runnable {
 		
 	}
 
+	/**
+	 * Simula el llenado de una botella haciendo una espera.
+	 * 
+	 * @return Devuelve la id que corresponde a la botella
+	 */
 	private int llenarBotella() {
 		sleep(Config.T_CREA_BOTELLA);
 		return fabrica.getIdProximaBotella();
 	}
 
+	/**
+	 * Pone la botella en la caja vacia que hay en la Fabrica
+	 * 
+	 * @param botella Botella a colocar
+	 */
 	private void ponerBotellaEnCaja(int botella) {
 		fabrica.ponerBotellaEnCaja(botella);
 	}
  
+	/**
+	 * Duerme el hilo por un tiempo
+	 * @param ms Los milisegundos  dormir el hilo
+	 */
 	private void sleep(long ms) {
 		try {
-			Thread.currentThread().sleep(ms);
+			Thread.sleep(ms);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

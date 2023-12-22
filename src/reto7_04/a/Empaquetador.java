@@ -1,5 +1,12 @@
 package reto7_04.a;
 
+/**
+ * Recoje las cajas llenas de la Fabrica, las coloca en el Almacen de la Fabrica
+ * y pone una nueva caja vacia para que los embotelladores la llenen
+ * Su carrera es un bucle infinito de retirar caja llena y poner caja vacia
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Empaquetador implements Runnable {
 
 	@Override
@@ -12,6 +19,9 @@ public class Empaquetador implements Runnable {
 
 	}
 
+	/**
+	 * Crea una nueva caja vacia y la colocola en la Fabrica
+	 */
 	private void ponerCajaVacia() {
 		Caja caja = new Caja(Fabrica.idProximaCaja++);
 		sleep(Config.T_PONER_CAJA);
@@ -19,6 +29,9 @@ public class Empaquetador implements Runnable {
 		Estadistica.setEmpaquetador("Caja vacia " + caja.getId() + " puesta");
 	}
 
+	/**
+	 * Retira la caja llena de la Fabrica y la coloca en el Almacen de la Fabrica
+	 */
 	private void retirarCajaLlena() {
 		Estadistica.setEmpaquetador("Esperando para poder retirar caja llena");
 		Caja caja = Fabrica.retirarCajaLlena();
@@ -27,10 +40,14 @@ public class Empaquetador implements Runnable {
 		Fabrica.almacen.add(caja);
 	}
 	
-	
+	/**
+	 * Duerme el hilo por un tiempo
+	 * 
+	 * @param ms Los milisegundos dormir el hilo
+	 */
 	private void sleep(long ms) {
 		try {
-			Thread.currentThread().sleep(ms);
+			Thread.sleep(ms);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

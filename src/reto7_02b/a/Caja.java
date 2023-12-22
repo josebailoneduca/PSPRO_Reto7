@@ -69,7 +69,7 @@ public class Caja {
 	 * @return El string representando el estado de llenado
 	 */
 	public String contenido() {
-		return "Caja " + id + ", botellas=" + Arrays.toString(botellas).replace("0", "X");
+		return "Caja " + id + ", botellas=" + Arrays.toString(botellas).replace("0,", "X,");
 
 	}
 

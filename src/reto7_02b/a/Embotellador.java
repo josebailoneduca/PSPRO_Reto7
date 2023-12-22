@@ -2,7 +2,8 @@ package reto7_02b.a;
 
 
 /**
- * Productor de botellas. Las va colocando en la caja vacia.
+ * Productor de botellas. Las va colocando en la caja vacia. 
+ * Tiene como carrera un bucle infinito de llenar botella y ponerla en la caja
  * 
  * @author Jose Javier Bailon Ortiz
  */
