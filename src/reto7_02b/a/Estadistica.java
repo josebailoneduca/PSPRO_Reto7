@@ -3,6 +3,8 @@ package reto7_02b.a;
 
 /**
  * Se encarga de mostrar el estado del sistema
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Estadistica {
 	/**

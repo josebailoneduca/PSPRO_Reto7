@@ -50,7 +50,7 @@ public class Loro implements Runnable {
 			Jaula.comida.acquire();
 			Estadistica.comer(id, System.currentTimeMillis()-iniT);
 			//espera simulando comer
-			Thread.currentThread().sleep(new Random().nextLong(Config.MIN_COMER,Config.MAX_COMER));
+			Thread.sleep(new Random().nextLong(Config.MIN_COMER,Config.MAX_COMER));
 			//liberar plaza de comida
 			Jaula.comida.release();
 		} catch (InterruptedException e) {

@@ -21,6 +21,7 @@ package reto7_02b.b;
  * Esos hilos se comunican con la clase Fabrica a traves de la cual se pasan objetos Caja que contienen enteros que representan las id de las botellas.
  * </p>
  * 
+ * @author Jose Javier Bailon Ortiz
  * */
 public class Reto7_2B_B {
 

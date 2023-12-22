@@ -1,5 +1,10 @@
 package reto7_02b.b;
 
+/**
+ * Imprime en pantalla el estado del sistema
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Estadistica {
 	/**
 	 * Estado del embotellador

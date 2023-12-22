@@ -3,6 +3,8 @@ package reto7_02b.a;
 
 /**
  * Productor de botellas. Las va colocando en la caja vacia.
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Embotellador implements Runnable {
 
@@ -44,7 +46,7 @@ public class Embotellador implements Runnable {
 	 */
 	private void sleep(long ms) {
 		try {
-			Thread.currentThread().sleep(ms);
+			Thread.sleep(ms);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

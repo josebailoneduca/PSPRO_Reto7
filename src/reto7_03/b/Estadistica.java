@@ -1,18 +1,32 @@
 package reto7_03.b;
 
-import java.util.Iterator;
-
-import reto7_01.b.Config;
 
 
 /**
  * Imprime estadisticas en pantalla sobre la actividad de los filosofos y la pertenencia de los tenedores
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Estadistica {
 	
+	/**
+	 * Estado comiendo
+	 */
 	public static final int COMIENDO=0;
+	
+	/**
+	 * Estado esperando columpio
+	 */
 	public static final int ESPERA_COLUMPIO=1;
+	
+	/**
+	 * Estado columpliandose
+	 */
 	public static final int COLUMPIANDOSE=2;
+	
+	/**
+	 * Estado esperando a comer
+	 */
 	public static final int ESPERA_COMER=3;
 	
 	/**
@@ -26,8 +40,7 @@ public class Estadistica {
 	 */
 	private static int[] estadoLoros=new int[Config.N_LOROS];
 	/**
-	 * almacena el sexo de los loros
-	 * //0"comiendo", 1 "esperando columpio",2 "columpiandose",3 "esperando comer"
+	 * almacena el sexo de los loros true macho, false hembra
 	 */
 	private static boolean[] sexoLoros=new boolean[Config.N_LOROS];
 	

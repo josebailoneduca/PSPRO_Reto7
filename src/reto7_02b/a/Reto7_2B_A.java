@@ -18,6 +18,7 @@ package reto7_02b.a;
  * a traves de la cual comunican sus acciones mediante objetos Caja que contienen enteros que representan las id de las botellas.
  * </p>
  * 
+ * @author Jose Javier Bailon Ortiz
  * */
 public class Reto7_2B_A {
 

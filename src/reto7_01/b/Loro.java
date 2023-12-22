@@ -58,7 +58,7 @@ public class Loro implements Runnable {
 			Jaula.comida.cogerSitio();
 			Estadistica.comer(id, System.currentTimeMillis()-iniT);
 
-			Thread.currentThread().sleep(new Random().nextLong(Config.MIN_COMER,Config.MAX_COMER));
+			Thread.sleep(new Random().nextLong(Config.MIN_COMER,Config.MAX_COMER));
 			
 			Estadistica.setEstado(id, Estadistica.ESPERA_COLUMPIO);
 			
@@ -83,7 +83,7 @@ public class Loro implements Runnable {
 				
 				Estadistica.columpiarse(id, System.currentTimeMillis()-iniT);
 			
-			Thread.currentThread().sleep(new Random().nextLong(Config.MIN_COLUMPIARSE,Config.MAX_COLUMPIARSE));
+			Thread.sleep(new Random().nextLong(Config.MIN_COLUMPIARSE,Config.MAX_COLUMPIARSE));
 			
 			Estadistica.setEstado(id, Estadistica.ESPERA_COMER);
 			Jaula.columpio.dejarSitio();

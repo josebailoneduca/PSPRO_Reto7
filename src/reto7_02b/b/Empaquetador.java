@@ -3,6 +3,8 @@ package reto7_02b.b;
 /**
  * Recoje las cajas llenas de la Fabrica, las coloca en el Almacen de la Fabrica
  * y pone una nueva caja vacia para que el embotellador la llene
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Empaquetador implements Runnable {
 	/**
@@ -58,7 +60,7 @@ public class Empaquetador implements Runnable {
 	 */	
 	private void sleep(long ms) {
 		try {
-			Thread.currentThread().sleep(ms);
+			Thread.sleep(ms);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

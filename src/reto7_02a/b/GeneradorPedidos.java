@@ -29,7 +29,7 @@ public class GeneradorPedidos {
 			Pedidos.agregarPedido(crearPedido());
 
 			try {
-				Thread.currentThread().sleep(Config.MIN_CREA_PEDIDO,Config.MAX_CREA_PEDIDO);
+				Thread.sleep(Config.MIN_CREA_PEDIDO,Config.MAX_CREA_PEDIDO);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

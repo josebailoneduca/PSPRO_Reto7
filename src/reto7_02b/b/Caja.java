@@ -8,6 +8,8 @@ import reto7_02b.a.Config;
  * Objeto caja con una capacidad determinada. Conforme se va lllenando el
  * parametro capacidad desciende hasta llegar a 0 momento en el que se considera
  * que esta llena.
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Caja {
 	/**

@@ -3,22 +3,25 @@ package reto7_03.b;
 
 
 /**
- * 1 En una pajarería están teniendo problemas para tener a todos sus loros felices. Los loros 
- * comparten una jaula en la que hay un plato con comida y un columpio para hacer ejercicio. Todos 
- * los loros repiten la misma rutina una y otra vez: primero comen del plato y después se columpian. 
- * Pero se encuentran con el inconveniente de que sólo tres de ellos pueden comer del plato al 
- * mismo tiempo y que en el columpio solo cabe un pájaro. 
+/**
+ * 
+ *  Clase main del ejercicio Reto7_3 solucion B
+ *  
+ * En este caso la implementacion controla el acceso a columpio y comida con dos clases monitor: Columpio y Comida
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Reto7_3B {
 
 	public static void main(String[] args) {
 		Thread[] loros = new Thread[Config.N_LOROS];
 		
+		//generar hilos basados en runnables loros
 		for (int i=0;i<loros.length;i++)
 			loros[i]=new Thread(new Loro(i));
 		
 		
-		
+		//lanzar hilos
 		for (int i=0;i<loros.length;i++)
 			loros[i].start();
 		

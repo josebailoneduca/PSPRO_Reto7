@@ -1,8 +1,15 @@
 package reto7_02b.b;
 
 import java.util.LinkedList;
-import java.util.concurrent.Semaphore;
 
+
+
+/**
+ * Clase que controla el acceso a la caja vacia y el almacen donde se guardan las cajas llenas.
+ * Controla el acceso de embotellador y empaquetador metodos sincronizados.
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Fabrica {
 	
 	/**

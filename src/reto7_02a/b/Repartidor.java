@@ -41,7 +41,7 @@ public class Repartidor extends Thread {
 	private void repartirPizza(Pizza pizza) {
 		Estadistica.setEstadoRepartidores(Estadistica.REPARTIENDO, pizza.toString());
 		try {
-			Thread.currentThread().sleep(new Random().nextInt(Config.MIN_REPARTIR, Config.MAX_REPARTIR));
+			Thread.sleep(new Random().nextInt(Config.MIN_REPARTIR, Config.MAX_REPARTIR));
 		} catch (InterruptedException e) {
 		}
 	}

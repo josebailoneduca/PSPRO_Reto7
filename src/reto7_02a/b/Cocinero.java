@@ -56,7 +56,7 @@ public class Cocinero extends Thread {
 	private Pizza cocinar(Pedido pedido) {
 		Estadistica.setEstadoCocinero(Estadistica.COCINANDO, pedido.toString());
 		try {
-			Thread.currentThread().sleep(new Random().nextInt(Config.MIN_COCINAR, Config.MAX_COCINAR));
+			Thread.sleep(new Random().nextInt(Config.MIN_COCINAR, Config.MAX_COCINAR));
 		} catch (InterruptedException e) {
 		}
 		return new Pizza(pedido.getId(), pedido.getNombrePizza());

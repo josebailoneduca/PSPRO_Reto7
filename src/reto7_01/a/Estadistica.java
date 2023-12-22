@@ -1,7 +1,5 @@
 package reto7_01.a;
 
-import java.util.Iterator;
-
 
 /**
  * Imprime estadisticas en pantalla sobre la actividad del sistema.

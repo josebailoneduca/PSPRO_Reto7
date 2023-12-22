@@ -1,6 +1,5 @@
 package reto7_01.b;
 
-import java.util.concurrent.Semaphore;
 
 /**
  * Esta clase representa la jaula, contiene los accesos a la comida y  
