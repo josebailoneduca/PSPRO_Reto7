@@ -1,17 +1,27 @@
 package reto7_02b.b;
 
 /**
- * b). Se tienen dos procesos que modelan una planta embotelladora de bebidas, y que trabajan en
- * paralelo:
- * • «Embotellador» se encarga de preparar botellas.
- * • «Empaquetador» se encarga de empaquetar y reponer las cajas donde se van colocando las botellas.
+ * <p>
+ * Clase main del ejercicio Reto7_2B solucion B
+ * </p>
  * 
- * Cada vez que el embotellador prepara una botella, ésta se coloca en una caja, que tiene una
- * capacidad de 10 botellas. Si al colocar la botella la caja queda llena, se envía una señal al
- * empaquetador, que toma la caja, la sella y la guarda en un almacén. El empaquetador deposita una
- * nueva caja, totalmente vacía. Mientras el empaquetador está haciendo su labor, el embotellador
- * no puede colocar sus botellas, ya que en esos momentos no hay una caja disponible.
- */
+ *
+ *<p>
+ * Embotellador genera Botellas y las coloca en la caja vacia. Cuando esta se llena Empaquetador la retira y coloca una caja vacia.
+ * </p>
+ *
+ * <p>
+ * La solucion esta implementada haciendo que la clase Fabrica sea monitor. Esta clase se encarga de controlar el acceso a la caja vacia 
+ * poniendo en espera al embotellador cuando ya no quedan espacios en la caja y al empaquetador cuando la caja que debe retirar aun no esta 
+ * llena. 
+ * </p>
+ * 
+ * <p>
+ * Esta clase instancia la fabrica y se la establece a la estadistica(encargada de mostrar el estado) y los dos hilos basados en Embotellador y Empaquetador los cuales pone a correr. 
+ * Esos hilos se comunican con la clase Fabrica a traves de la cual se pasan objetos Caja que contienen enteros que representan las id de las botellas.
+ * </p>
+ * 
+ * */
 public class Reto7_2B_B {
 
 	public static void main(String[] args) {

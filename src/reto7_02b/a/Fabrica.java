@@ -4,23 +4,41 @@ import java.util.LinkedList;
 import java.util.concurrent.Semaphore;
 
 public class Fabrica {
-	private static Caja cajaParaLLenar = new Caja(0);
+	
+	/**
+	 * Almacena las cajas llenas
+	 */
 	public static LinkedList<Caja> almacen = new LinkedList<Caja>();
+
+	/**
+	 * Id a usar para la proxima botella
+	 */
 	public static int idProximaBotella=1;
+
+	/**
+	 * Id a usar para la proxima caja
+	 */
 	public static int idProximaCaja=1;
+
+	/**
+	 * Caja para ser completada por el embotellador
+	 */
+	private static Caja cajaParaLLenar = new Caja(0);
+	
 	/**
 	 * Abierto cuando hay caja llena
 	 */
-	public static Semaphore cajaEstaLlena = new Semaphore(0);
+	private static Semaphore cajaEstaLlena = new Semaphore(0);
 
 	/**
 	 * Abierto cuando hace falta caja vacia
 	 */
-	public static Semaphore faltaCajaVacia = new Semaphore(0);
+	private static Semaphore faltaCajaVacia = new Semaphore(0);
+
 	/**
 	 * abierto cuando hay caja con plazas disponibles
 	 */
-	public static Semaphore hayCajaConPlazas = new Semaphore(1);
+	private static Semaphore hayCajaConPlazas = new Semaphore(1);
 
 	/**
 	 * Poner una caja vacia para ser llenada
@@ -84,6 +102,10 @@ public class Fabrica {
 
 	}
 
+	/**
+	 * Devuelve una referencia a la caja que hay actualmente para ser llenada
+	 * @return La caja
+	 */
 	public static Caja getCajaParaLLenar() {
 		return cajaParaLLenar;
 	}

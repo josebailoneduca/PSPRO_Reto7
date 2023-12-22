@@ -1,17 +1,24 @@
 package reto7_02b.a;
 
 /**
- * b). Se tienen dos procesos que modelan una planta embotelladora de bebidas, y que trabajan en
- * paralelo:
- * • «Embotellador» se encarga de preparar botellas.
- * • «Empaquetador» se encarga de empaquetar y reponer las cajas donde se van colocando las botellas.
+ * <p>
+ * Clase main del ejercicio Reto7_2B solucion A
+ * </p>
  * 
- * Cada vez que el embotellador prepara una botella, ésta se coloca en una caja, que tiene una
- * capacidad de 10 botellas. Si al colocar la botella la caja queda llena, se envía una señal al
- * empaquetador, que toma la caja, la sella y la guarda en un almacén. El empaquetador deposita una
- * nueva caja, totalmente vacía. Mientras el empaquetador está haciendo su labor, el embotellador
- * no puede colocar sus botellas, ya que en esos momentos no hay una caja disponible.
- */
+ * <p>
+ * La solucion esta implementada con semaforos en la clase Fabrica que controlan el acceso a la caja vacia por parte de Embotellador y Empaquetador. 
+ * </p>
+ *
+ *<p>
+ * Embotellador genera Botellas y las coloca en la caja vacia. Cuando esta se llena Empaquetador la retira y coloca una caja vacia.
+ * </p>
+ *
+ * <p>
+ * Esta clase genera dos hilos basados en Embotellador y Empaquetador y los pone a correr. Esos hilos actuan sobre la clase Fabrica,
+ * a traves de la cual comunican sus acciones mediante objetos Caja que contienen enteros que representan las id de las botellas.
+ * </p>
+ * 
+ * */
 public class Reto7_2B_A {
 
 	public static void main(String[] args) {

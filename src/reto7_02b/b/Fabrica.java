@@ -4,9 +4,25 @@ import java.util.LinkedList;
 import java.util.concurrent.Semaphore;
 
 public class Fabrica {
+	
+	/**
+	 * Caja para ser completada por el embotellador
+	 */
 	private Caja cajaParaLLenar = new Caja(0);
+	
+	/**
+	 * Almacena las cajas llenas
+	 */
 	public LinkedList<Caja> almacen = new LinkedList<Caja>();
+	
+	/**
+	 * Id a usar para la proxima botella
+	 */
 	public int idProximaBotella=1;
+	
+	/**
+	 * Id a usar para la proxima caja
+	 */
 	public int idProximaCaja=1;
  
 
@@ -69,8 +85,13 @@ public class Fabrica {
 		cajaParaLLenar.ponerBotella(botella);
 		this.notify();
 	}
-
-	public Caja getCajaParaLLenar() {
+	
+	
+	/**
+	 * Devuelve una referencia a la caja que hay actualmente para ser llenada
+	 * @return La caja
+	 */
+	public synchronized Caja getCajaParaLLenar() {
 		return cajaParaLLenar;
 	}
  
