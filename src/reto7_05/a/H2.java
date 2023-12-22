@@ -2,6 +2,12 @@ package reto7_05.a;
 
 import java.util.Random;
 
+
+/**
+ * Hilo 2 ejecuta en bucle los pasos c y d. Cuando ejecuta el paso D debe esperar al semaforo
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class H2 extends Thread {
 
 	@Override
@@ -18,10 +24,16 @@ public class H2 extends Thread {
 		}
 	}
 
+	/**
+	 * Representacion de c.
+	 */
 	private void c() {
 		Estadistica.c++;
 	}
 
+	/**
+	 * Representacion de a. Debe esperar al semaforo de control de D
+	 */
 	private void d() {
 		try {
 			Control.sD.acquire();

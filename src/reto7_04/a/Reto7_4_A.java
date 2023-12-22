@@ -1,8 +1,5 @@
 package reto7_04.a;
 
-import java.util.Iterator;
-
-/**
 /**
  * <p>
  * Clase main del ejercicio Reto7_4 solucion A

@@ -2,6 +2,11 @@ package reto7_05.a;
 
 import java.util.Random;
 
+/**
+ * Hilo 1 ejecuta en bucle los pasos a y b. Cuando ejecuta el paso A libera el semaforo que permite la ejecucion de D
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class H1 extends Thread {
 
 	@Override
@@ -17,11 +22,17 @@ public class H1 extends Thread {
 		}
 	}
 
+	/**
+	 * Representacion de a. Libera el semaforo de control de D
+	 */
 	private void a() {
 		Estadistica.a++;
 		Control.sD.release();
 	}
 
+	/**
+	 * Representacion de b
+	 */
 	private void b() {
 		Estadistica.b++;
 	}
