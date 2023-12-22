@@ -1,6 +1,5 @@
 package reto7_06a.a;
 
-import java.util.Random;
 
 /**
  * Hilo base de consulta a la base de datos

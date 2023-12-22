@@ -7,22 +7,27 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * <p>
  * Simula una base de datos. Almacena un listado de numeros enteros en un
  * archivo binario de manera secuencial. Se le puede pedir que devuelve el valor
  * de una de las posiciones guardadas o que incremente en 1 el valor de alguna
  * de las posiciones de archivo.
- * 
- * Controla el acceso con un algoritmo de lector escritor de W. Stallins con
+ * </p>
+ * <p>
+ * Controla el acceso con un algoritmo derivado del de W. Stallins con
  * prioridad para los lectores.
- * 
- * Varios lectores puede acceder simultaneamente pero cuando un escritor tiene
- * el acceso nadie puede acceder. Este comportamiento esta implementado con
- * semaforos.
- * 
+ * </p>
+ * <p>
+ * En vez de usar semáforos para la MUTEX se usan banderas  y metodos sincronizados que identifican
+ * cuando puede un lector o un escritor avanzar en el codigo.
+ * </p>
+ * <p>
+ * Las banderas son lecotresPermitidos y escritoresPermitidos. Los metodos que comprueban y modifican 
+ * esas banderas son:  bloquearLectores(),liberarLectores(), bloquearEscritores(), liberarEscritores()
+ * </p>
+ * <p>
  * @author Jose Javier Bailon Ortiz
  */
 public class BaseDatos {
@@ -71,11 +76,11 @@ public class BaseDatos {
 	/**
 	 * Incrementa el valor de una tupla en +1
 	 * 
-	 * Controla el mutex de la seccion critica según la parte correspondiente a los
-	 * escritores del algoritmo de W. Stallins con modificaciones para evitar
-	 * prioridad de lectores si asi se ha configurado
+	 * Controla el mutex de la seccion critica segun lo descrito en los metodos bloquearEscritores() y liberarEscritores()
 	 * 
 	 * @param id Id de la tupla a editar
+	 * @see #bloqueaEscritores()
+	 * @see #liberarEscritores()
 	 */
 	public void update(int id) {
 		// escritores esperan
@@ -91,12 +96,16 @@ public class BaseDatos {
 	}
 
 	/**
-	 * Devuelve el valor de una tupla Controla el mutex de la seccion critica según
-	 * la parte correspondiente a los lectores del algoritmo de W. Stallins con
-	 * modificaciones para evitar prioridad de lectores si asi se ha configurado
+	 * Devuelve el valor de una tupla.  Controla el mutex de la seccion critica según
+	 * lo descrito en los metodos bloquearLectores(), bloquearEscritores, liberarLectores() y liberarEscritores()
 	 * 
 	 * @param id Id de la tupla
 	 * @return El valor de la tupla
+	 * 
+	 * @see #bloqueaEscritores()
+	 * @see #liberarEscritores()
+	 * @see #bloqueaLectores()
+	 * @see #liberarEscritores()
 	 */
 	public int select(int id) {
 		// lectores esperan
@@ -131,60 +140,6 @@ public class BaseDatos {
 
 		// devolver valor leido
 		return leido;
-	}
-
-	
-	
-	
-	/**
-	 * Bloqueo de los lectores esperando hasta tener la vez
-	 */
-	synchronized private void bloqueaLectores() {
-		while (!lectoresPermitidos)
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		lectoresPermitidos = false;
-	}
-
-	
-	
-	
-	/**
-	 * Libera los lectores
-	 */
-	synchronized private void liberarLectores() {
-		lectoresPermitidos = true;
-		this.notifyAll();
-	}
-
-	
-	
-	
-	/**
-	 * Bloquea los escritores esperando hasta tener la vez
-	 */
-	synchronized private void bloqueaEscritores() {
-		while (!escritoresPermitidos)
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		escritoresPermitidos = false;
-	}
-
-	
-	
-	
-	/**
-	 * Libera los escritores
-	 */
-	synchronized private void liberarEscritores() {
-		escritoresPermitidos = true;
-		this.notifyAll();
 	}
 
 	
@@ -243,6 +198,48 @@ public class BaseDatos {
 	}
 
 	/**
+	 * Bloqueo de los lectores esperando hasta tener la vez
+	 */
+	synchronized private void bloqueaLectores() {
+		while (!lectoresPermitidos)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		lectoresPermitidos = false;
+	}
+
+	/**
+	 * Libera los lectores
+	 */
+	synchronized private void liberarLectores() {
+		lectoresPermitidos = true;
+		this.notifyAll();
+	}
+
+	/**
+	 * Bloquea los escritores esperando hasta tener la vez
+	 */
+	synchronized private void bloqueaEscritores() {
+		while (!escritoresPermitidos)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		escritoresPermitidos = false;
+	}
+
+	/**
+	 * Libera los escritores
+	 */
+	synchronized private void liberarEscritores() {
+		escritoresPermitidos = true;
+		this.notifyAll();
+	}
+
+	/**
 	 * Crea la base de datos en disco con el numero de tuplas especificado con valor
 	 * 0 cada una. Si el archivo ya existe es borrado
 	 */
@@ -261,7 +258,6 @@ public class BaseDatos {
 		try {
 			f.createNewFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

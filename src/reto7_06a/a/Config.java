@@ -1,5 +1,10 @@
 package reto7_06a.a;
 
+/**
+ * Parametros de configuracion
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Config {
 	/**
 	 * Milisegundos maximos que cada hebra espera entre cada ciclo. 
@@ -28,23 +33,34 @@ public class Config {
 	 */
 	public static final boolean debugProgresoUpdate=false;
 	
-	
-	
-	//ruta del archivo de la base de datos
+		
+	/**
+	 * ruta del archivo de la base de datos
+	 */
 	public static final String rutaArchivo = "basedatos.dat";
 	
-	//catindad de hebras que leeran
+	/**
+	 * 
+	 */
 	public static final int hebrasLectura = 30;
 	
-	//cantidad de hebras que escribiran
+	/**
+	 * cantidad de hebras que escribiran
+	 */
 	public static final int hebrasEscritura = 30;
 	
-	//cantidad de lecturas o escrituras por hebra 
+	/**
+	 * cantidad de lecturas o escrituras por hebra 
+	 */
 	public static final int ciclos = 50;
 	
-	//cantidad de tuplas existentes en la base de datos
+	/**
+	 * cantidad de tuplas existentes en la base de datos
+	 */
 	public static final int numeroTuplas = 20;
 	
-	//iniciar las hebras en un orden aleatorio
+	/**
+	 * iniciar las hebras en un orden aleatorio
+	 */
 	public static final boolean startAleatorioDeHebras = true;
 }

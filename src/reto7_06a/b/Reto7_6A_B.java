@@ -5,17 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 
-/**
-* Lectores y escritores en BD.
-*  • Puede haber varios lectores trabajando concurrentemente.
-*  • Si un escritor intenta acceder a la BD mientras hay lectores trabajando, el escritor debe
-*    esperar a que la BD quede libre.
-*  • Mientras un escritor está trabajando con la BD, no puede haber ningún otro proceso
-*    trabajando (ni lector ni escritor).
-* a). Un lector puede entrar en cuanto sea posible. (PRIORIDAD LECTURA)
 
+ /**
+ * Implementación con una modificacion del algoritmo de W. Stallins de lectura/escritura con prioridad de lectura implementado con banderas
+ * y metodos sincronizados como se describe en la clase BaseDatos. 
+ * Simula una base de datos almacenando un listado de números enteros en un archivo binario de manera secuencial. 
  * 
  * @author Jose Javier Bailon Ortiz
+ * 
+ * @see BaseDatos
  */
 public class Reto7_6A_B {
 	

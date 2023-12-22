@@ -32,7 +32,6 @@ public class HiloConsultaBD extends Thread {
 	 * @param ciclos Cantidad de veces que debe ejecutar consulta
 	 */
 	public HiloConsultaBD(int indice, BaseDatos bd, int ciclos) {
-		super();
 		this.indice = indice;
 		this.bd=bd;
 		this.ciclos=ciclos;

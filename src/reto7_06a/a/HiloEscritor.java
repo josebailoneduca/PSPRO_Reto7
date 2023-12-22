@@ -27,6 +27,7 @@ public class HiloEscritor extends HiloConsultaBD {
 		for (int c = 0; c < ciclos; c++) {
 			//seleccion de una tupla aleatoria
 			int idTupla = new Random().nextInt(bd.getNumeroTuplas());
+			
 			//update de la tupla
 			bd.update(idTupla);
 			

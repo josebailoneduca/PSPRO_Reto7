@@ -26,6 +26,7 @@ public class HiloLector extends HiloConsultaBD {
 		for (int c = 0; c < ciclos; c++) {
 			//seleccion de una tupla aleatoria
 			int idTupla = new Random().nextInt(bd.getNumeroTuplas());
+			
 			//lectura de la base de datos
 			int valorLeido=bd.select(idTupla);
 			
