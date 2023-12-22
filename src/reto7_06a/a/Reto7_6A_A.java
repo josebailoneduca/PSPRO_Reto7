@@ -6,6 +6,8 @@ import java.util.Random;
 
 
  /**
+  * 
+  * Main del Reto7_6A_A.
  * Implementación según el algoritmo de W. Stallins de lectura/escritura con prioridad de lectura implementado con semáforos.  
  * Es una adaptación del apartado C del reto 4 pero implementado con semáforos de Java y simplificando para abarcar exactamente 
  * el problema a resolver. Simula una base de datos almacenando un listado de números enteros en un archivo binario de manera secuencial. 

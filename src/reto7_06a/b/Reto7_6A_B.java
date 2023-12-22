@@ -7,6 +7,7 @@ import java.util.Random;
 
 
  /**
+  * Main del Reto7_6A_B.
  * Implementación con una modificacion del algoritmo de W. Stallins de lectura/escritura con prioridad de lectura implementado con banderas
  * y metodos sincronizados como se describe en la clase BaseDatos. 
  * Simula una base de datos almacenando un listado de números enteros en un archivo binario de manera secuencial. 

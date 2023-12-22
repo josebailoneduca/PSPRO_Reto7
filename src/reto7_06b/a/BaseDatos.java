@@ -27,16 +27,46 @@ import java.util.concurrent.Semaphore;
 public class BaseDatos {
 
 	//semaforos
-	Semaphore sLP; //lecturas pendientes
-	Semaphore sEP; //escrituras pendientes
-	Semaphore sEEX;//escritura esclusiva
-	Semaphore sCEX;//mutex para acceso a contadores
+	/**
+	 * Semaforo de lecturas pendientes
+	 */
+	private Semaphore sLP; //lecturas pendientes
+	
+	/**
+	 * Semaforo de escrituras pendientes
+	 */
+	private Semaphore sEP; //escrituras pendientes
+	
+	/**
+	 * Semaforo de escrutura exclusiva
+	 */
+	private Semaphore sEEX;//escritura esclusiva
+	
+	/**
+	 * Semaforo de mutex para contadores
+	 */
+	private Semaphore sCEX;//mutex para acceso a contadores
 	
 	//contadores
-	int la;
-	int ll;
-	int ea;
-	int ee;
+	/**
+	 * Lectores activos
+	 */
+	private int la;
+	
+	/**
+	 * Lectores leyendo
+	 */
+	private int ll;
+	
+	/**
+	 * Escritores activos
+	 */
+	private int ea;
+	
+	/**
+	 * Escritores escribiendo
+	 */
+	private int ee;
 
 	/**
 	 * Cantidad de tuplas de la base de datos
@@ -76,8 +106,7 @@ public class BaseDatos {
 	 * Incrementa el valor de una tupla en +1
 	 * 
 	 * Controla el mutex de la seccion critica según la parte correspondiente a 
-	 * los escritores del algoritmo de W. Stallins con modificaciones
-	 * para evitar prioridad de lectores si asi se ha configurado
+	 * los escritores del algoritmo de J. Bacon con  prioridad para los escritores
 	 * 
 	 * @param id Id de la tupla a editar
 	 */
@@ -94,8 +123,7 @@ public class BaseDatos {
 	/**
 	 * Devuelve el valor de una tupla
 	 * Controla el mutex de la seccion critica según la parte correspondiente a 
-	 * los lectores del algoritmo de W. Stallins con modificaciones
-	 * para evitar prioridad de lectores si asi se ha configurado
+	 * los lectores del algoritmo de J. Bacon con  prioridad para los escritores
 	 * 
 	 * @param id Id de la tupla
 	 * @return El valor de la tupla
@@ -113,85 +141,6 @@ public class BaseDatos {
 		return leido;
 	}
 
-	
-	
-	
-	
-	
-	private void adquirir_lector() {
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		la++;
-		if (ea == 0) {
-			ll++;
-			sLP.release();
-		}
-		sCEX.release();
-		try {
-			sLP.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void liberar_lector() {
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ll--;
-		la--;
-		if (ll==0) 
-			while(ee<ea) {
-				ee++;
-				sEP.release();
-			}
-		sCEX.release();
-	}
-	
-	private void adquirir_escritor()  {
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ea++;
-		if (ll==0) {
-			ee++;
-			sEP.release();
-		}
-		sCEX.release();
-		try {
-			sEP.acquire();
-			sEEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void liberar_escritor() {
-		sEEX.release();
-		try {
-			sCEX.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ee--;
-		ea--;
-		if (ea==0) {
-			while(ll<la) {
-				ll++;
-				sLP.release();
-			}
-		}
-		sCEX.release();
-	}
-	
-	
 	
 	
 	/**
@@ -218,7 +167,7 @@ public class BaseDatos {
 			//recoger todos los valores hasta EOF
 			while (true)
 				listaValores.add(raf.readInt());
-
+	
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (EOFException e) {
@@ -245,6 +194,122 @@ public class BaseDatos {
 		return this.f.getAbsolutePath();
 	}
 
+	/**
+	 * Adquirir lector segun algoritmo de J. Bacon con prioridad para los escritores
+	 */
+	private void adquirir_lector() {
+		//mutex de contadores
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//registrar lector activo
+		la++;
+		//si no hay escritores activos incrementar los lectores leyendo
+		//y liberar un permiso de lecturas pendientes
+		if (ea == 0) {
+			ll++;
+			sLP.release();
+		}
+		//fin de mutex de contadores
+		sCEX.release();
+		
+		//esperar al semaforo de lecturas pendientes
+		try {
+			sLP.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Liberar lector segun algoritmo de J. Bacon con prioridad para los escritores
+	 */
+	private void liberar_lector() {
+		//mutex contadores
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//decrementar lectores leyendo
+		ll--;
+		//decrementar lectores activos
+		la--;
+		//si no hay lectores leyendo incrementar
+		//los lectores escribiendo  y escrituras pendientes tantos como escritores activos 
+		//falten respecto a escritores escribiendo
+		if (ll==0) 
+			while(ee<ea) {
+				ee++;
+				sEP.release();
+			}
+		//fin mutex contadores
+		sCEX.release();
+	}
+	
+	/**
+	 * Adquirir escritor  segun algoritmo de J. Bacon con prioridad para los escritores
+	 */
+	private void adquirir_escritor()  {
+		//mutex contadores
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//incrementar escritor activo
+		ea++;
+		//si no hay lectores leyendo incrementar escriotres escribiendo
+		//y dar permiso en semaforo de escrituras pendientes
+		if (ll==0) {
+			ee++;
+			sEP.release();
+		}
+		//fin mutex contadores
+		sCEX.release();
+		
+		//esperar semaforos de escrituras pendientes y escritura exclusiva
+		try {
+			sEP.acquire();
+			sEEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Liberar escritor segun algoritmo de J. Bacon con prioridad para los escritores
+	 */
+	private void liberar_escritor() {
+		//liberar escritura exclusiva
+		sEEX.release();
+		//mutex contadores
+		try {
+			sCEX.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//decremetnar escritores escribiendo
+		ee--;
+		//decrementar escritores activos
+		ea--;
+		//si no quedan escritores liberar tantos lectores leyendo
+		//como lectores activos haya
+		if (ea==0) {
+			while(ll<la) {
+				ll++;
+				sLP.release();
+			}
+		}
+		//fin mutex contadores
+		sCEX.release();
+	}
+	
+	
+	
+	
 	/**
 	 * Crea la base de datos en disco con el numero de tuplas especificado con valor
 	 * 0 cada una. Si el archivo ya existe es borrado

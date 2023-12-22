@@ -1,5 +1,10 @@
 package reto7_06b.a;
 
+/**
+ * Parametros de configuracion
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Config {
 	/**
 	 * Milisegundos maximos que cada hebra espera entre cada ciclo. 

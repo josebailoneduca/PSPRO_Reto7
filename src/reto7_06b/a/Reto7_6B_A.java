@@ -5,20 +5,22 @@ import java.util.List;
 import java.util.Random;
 
 
- /**
- * Lectores y escritores en BD.
- *  • Puede haber varios lectores trabajando concurrentemente.
- *  • Si un escritor intenta acceder a la BD mientras hay lectores trabajando, el escritor debe
- *    esperar a que la BD quede libre.
- *  • Mientras un escritor está trabajando con la BD, no puede haber ningún otro proceso
- *    trabajando (ni lector ni escritor).
- *    
- * B). En cuanto haya un escritor esperando a entrar en la BD, los lectores que vayan llegando nuevos
- *     deben esperar, incluso si solo hay lectores trabajando en la BD.(PRIORIDAD ESCRITURA) 
 
-* 
- * 
+/**
+ * <p>
+ * Main del Reto7_6B_A.
+ * </p>
+ * <p>
+ * Controla el acceso con un algoritmo de lector escritor de J. Bacon con 
+ * prioridad para los escritores.
+ * </p>
+ * <p>
+ * En cuanto hay un escritor esperando tiene prioridad sobre el resto de lectores. 
+ * Este comportamiento esta implementado con semaforos. 
+ * </p>
  * @author Jose Javier Bailon Ortiz
+ * 
+ * @see BaseDatos
  */
 public class Reto7_6B_A {
 	
