@@ -4,20 +4,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 
 /**
  * Se encarga de ir colocando ingredientes diferentes sobre la mesa. 
  * Tiene un bucle infinito consistente en poner ingreientes diferentes de manera
  * indefinida sobre la mesa.
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Proveedor extends Thread {
 	
 	/**
 	 * Referencia a la mesa
 	 */
-	Mesa mesa;
+	private Mesa mesa;
 	
 	/**
 	 * Constructor 
@@ -29,7 +30,6 @@ public class Proveedor extends Thread {
 
 	@Override
 	public void run() {
-		Random r = new Random();
 		while(true) {
 			//seleccionar ingredientes
 			List<Ingrediente> listaIng =Arrays.asList(Ingrediente.values()); 
@@ -42,5 +42,4 @@ public class Proveedor extends Thread {
 			mesa.poner(ing1, ing2);
 		}
 	}
-
 }

@@ -6,6 +6,8 @@ package reto7_08a.a;
  * Tambien tiene una referencia a la mesa desde la cual coge los ingredientes que le faltan.
  * En su carrera tiene un bucle infinito en el que intenta coger los ingredientes qeu le faltan 
  * y cuando los obtiene se come el plato
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Mafioso extends Thread {
 	/**
@@ -18,6 +20,11 @@ public class Mafioso extends Thread {
 	 */
 	private Mesa mesa;
 
+	/**
+	 * Constructor
+	 * @param ingrediente Ingrediente que posee de por si el mafioso
+	 * @param mesa Referncia a la mesa de la que coger los ingredientes
+	 */
 	public Mafioso(Ingrediente ingrediente, Mesa mesa) {
 		this.ingrediente = ingrediente;
 		this.mesa = mesa;
@@ -50,6 +57,4 @@ public class Mafioso extends Thread {
 		}
 	}
 	
-	
-
 }

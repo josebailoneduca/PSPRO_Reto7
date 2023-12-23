@@ -15,7 +15,7 @@ package reto7_08a.a;
  * Cuando el proveedor coloca ingredientes queda esperando y cuando un mafioso termina de comer notifica a los hilos que esperan.
  * </p>
  * 
- * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class Mesa {
 	

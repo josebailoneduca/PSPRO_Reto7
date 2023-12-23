@@ -1,30 +1,46 @@
 package reto7_08a.b;
+
+
+/**
+ * <p>
+ * Main del Reto7_8A_A.
+ * </p>
+ * <p>
+ * En esta implementacion el control de acceso a los ingredientes es realizado por la clase Mesa con dos CyclicBarrier que controlan cuando se ha puesto ingrediente 
+ * y cuando han comprobado y en su caso consumido los ingredientes puestos en la mesa.
+ * </p>
+ * <p>
+ * La Mesa contiene dos barreras. Una para asegurar que se han puesto los ingredientes en la mesa y todos los mafiosos estan en 
+ * situacion de comprobar los ingredientes y otra de salida que asegura que los ingredientes se han comprobado y consumido.
+ * </p>
+ * <p>
+ * Cuando el proveedor coloca ingredientes en la mesa y todos los mafiosos estan listos para comprobarlos se levanta la barrera de entrada. Entonces
+ * los mafiosos comprueban los alimentos y acceden a la barrera de salida junto con el proveedor excepto el mafioso que come. Ese mafioso
+ * llega a la barrera de salida una vez ha comido, momento en el que se levanta la barrera de salida y el ciclo empieza de nuevo.
+ * </p>
+ * 
+ * @author Jose Javier Bailon Ortiz
+ * @see Mesa
+ */
 public class Reto7_8A_B {
 
-	// En una mesa hay cuatro personas: tres mafiosos y un proveedor. Cada mafioso come platos uno
-	// detrás de otro. Para poder comerse un plato se necesitan tres ingredientes: pasta, tomate y queso. Uno de
-	// los mafiosos tiene pasta, el otro tomate y el otro queso. El proveedor tiene una cantidad infinita de los tres
-	// ingredientes.
-	// Inicialmente, el agente coloca dos de los ingredientes en la mesa, escogidos al azar. El mafioso
-	// que tiene el ingrediente que falta toma lo que hay en la mesa, cocina un plato y se lo come.
-	// Cuando termina, se lo indica al proveedor. El proveedor entonces coloca otros dos ingredientes y
-	// el ciclo se repite una y otra vez. 
-
-	// . Se pide construir un programa compuesto por cuatro hilos (tres mafiosos y el proveedor) que
-	// estén correctamente sincronizados. 
 
 	public static void main(String[] args) {
+		//preparar mesa, mafiosos y proveedor
 		Mesa mesa = new Mesa();
 		Mafioso mafiosoA=new Mafioso(Ingrediente.PASTA, mesa);
 		Mafioso mafiosoB=new Mafioso(Ingrediente.TOMATE, mesa);
 		Mafioso mafiosoC=new Mafioso(Ingrediente.QUESO, mesa);
 		Proveedor proveedor = new Proveedor(mesa);
 		
+		//iniciar los hilos
 		mafiosoA.start();
 		mafiosoB.start();
 		mafiosoC.start();
 		proveedor.start();
 		
+		
+		//bucle que muestra el estado cada 500 ms
 		while(true) {
 			Estadistica.mostrarEstadistica();
 			try {
