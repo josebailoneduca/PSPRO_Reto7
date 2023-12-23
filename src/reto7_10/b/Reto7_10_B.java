@@ -1,15 +1,39 @@
 package reto7_10.b;
+
+ 
+
+/**
+ * <p>
+ * El problema esta resuelto usando un monitor que controla el comportamiento y espera de clientes y barbero. 
+ * </p>
+ * <p>
+ * La clase Barberia contiene el monitor que controla el flujo de hilos y es utilizada por los hilos de Cliente y Barbero en su funcion run. 
+ * Ver la clase Barberia, Barbero y Cliente para conocer los detalles del control.
+ * </p>
+ * <p>
+ * Un generador de cliente se encarga de ir creando y haciendo correr a nuevos clientes a un ritmo definido que 
+ * va variando segun lo especificado en el archivo de configuracion 
+ * </p>
+ * 
+ * 
+ * @author Jose Javier Bailon Ortiz
+ * @see Barberia
+ * @see Barbero
+ * @see Cliente
+ * @see GeneradorClientes
+ * @see Config
+ */
 public class Reto7_10_B {
 
-	// 10 ). Una barbería tiene una sala de espera con N sillas y la butaca del barbero. Si no hay
-	// clientes, el barbero duerme en la butaca. Si un cliente entra en la barbería y encuentra todas las
-	// sillas ocupadas se marcha. Si el barbero duerme el cliente lo despierta y si está ocupado y hay
-	// sillas disponibles el cliente se sienta. 
-	
-	
+ 
 	public static void main(String[] args) {
-		Barberia barberia = new Barberia(); 
+		//instanciar barberia
+		Barberia barberia = new Barberia();
+		
+		//iniciar barbero
 		new Barbero(barberia).start();
+		
+		//iniciar generador de clientes
 		new GeneradorClientes(barberia).start();
 		
 		
