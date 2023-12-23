@@ -6,9 +6,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+
+/**
+ * Se encarga de ir colocando ingredientes diferentes sobre la mesa. 
+ * Tiene un bucle infinito consistente en poner ingreientes diferentes de manera
+ * indefinida sobre la mesa.
+ */
 public class Proveedor extends Thread {
+	
+	/**
+	 * Referencia a la mesa
+	 */
 	Mesa mesa;
 	
+	/**
+	 * Constructor 
+	 * @param mesa La mesa en la que poner los ingredientes
+	 */
 	public Proveedor(Mesa mesa) {
 		this.mesa = mesa;
 	}
