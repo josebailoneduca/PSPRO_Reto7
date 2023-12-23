@@ -26,6 +26,8 @@ package reto7_06b.b;
  * El resultado es que que se puede producir varias lecturas o una escritura de manera simultanea y en cuanto hay un escritor esperando 
  * tiene prioridad sobre el resto de lectores y pasa en cuanto no haya nadie en el proceso de lectura ni escritura
  * </p>
+ * 
+ * @author Jose Javier Bailon Ortiz
  */
 public class MonitorLecturaEscritura {
 

@@ -20,6 +20,7 @@ import java.util.List;
  * metodos sinchronized y notificaciones a hebras que esperen.
  * </p>
  * 
+ * 
  * @author Jose Javier Bailon Ortiz
  * @see MonitorLecturaEscritura
  */

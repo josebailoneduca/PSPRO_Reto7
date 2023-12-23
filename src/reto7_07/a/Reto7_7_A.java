@@ -1,13 +1,35 @@
 package reto7_07.a;
+
+import reto7_06b.b.BaseDatos;
+import reto7_06b.b.MonitorLecturaEscritura;
+
+/**
+ * <p>
+ * Main del Reto7_7_A.
+ * </p>
+ * <p>
+ * Simula el uso de un recurso por parte de multiples hebras de tipo A y B. Las hebras de tipo A solo pueden acceder a usar 
+ * el recurso si almenos el doble de hebras de tipo B estan dentro. Hay un limite maximo de hebras que pueden usarlo de manera simultanea.
+ * </p>
+ * <p>
+ * Para lograr ese comportamiento la clase Recurso que representa el recurso a usar es un monitor que pone a dormir las hebras
+ * que intentan acceder a su uso si no se da la condicion descrita.
+ * </p>
+ * <p>
+ * Esta clase Main crea el recurso y lanza los hilos de tipo A y B segun lo descrito en la configuracion. 
+ * Tras eso inicia un bucle que muestra en pantalla el estado de los hilos cada 500ms 
+ * </p>
+ * 
+ * @author Jose Javier Bailon Ortiz
+ * 
+ */
+
 public class Reto7_7_A {
 
-	//A y B compiten por utilizar cierto recurso. En cualquier momento puede haber un máximo
-	//de N hilos de cualquier tipo usando el recurso (N es constante). Por otro lado, para que un hilo de
-	//tipo A pueda entrar a emplear el recurso, debe haber al menos el doble de tipo B dentro del recurso. 
-
 	
-
 	public static void main(String[] args) {
+		
+		//crear recurso e hilos
 		Recurso r = new Recurso();
 		Thread[] hilos = new Thread[Config.N_A+Config.N_B];
 		for (int i=0;i<Config.N_A;i++) {
@@ -22,7 +44,7 @@ public class Reto7_7_A {
 		}
 		
 		
-		
+		//bucle para mostrar estado del sistema
 		while(true) {
 			Estadistica.mostrarEstadistica();
 			try {
