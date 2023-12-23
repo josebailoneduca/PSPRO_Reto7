@@ -1,6 +1,14 @@
 package reto7_08b.a;
 
+/**
+ * Parametros de configuracion
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Config {
-	public static int T_COCINAR=6000;
+	/**
+	 * Tiempo que tarda un mafioso en cocinar y comerse un plato
+	 */
+	public static int T_COCINAR=3000;
 
 }
