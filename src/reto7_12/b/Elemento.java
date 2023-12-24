@@ -1,22 +1,52 @@
 package reto7_12.b;
 
+
+/**
+ * Representa un elemento consumible del buffer.
+ * Tiene un identificador y un limite de lecturas que coincide
+ * con el numero de consumidores. Conforme lo va leyendo cada consumidor
+ * el numero de lecturas restantes disminuye.
+ * 
+ * @author Jose Javier Bailon Ortiz
+ */
 public class Elemento {
 
-	int id;
-	int lecturasRestantes=Config.N_CONSUMIDORES;
+	/**
+	 * Identificador
+	 */
+	private int id;
+	
+	/**
+	 * Cantidad de lecturas restantes
+	 */
+	private int lecturasRestantes=Config.N_CONSUMIDORES;
 	
 	
+	/**
+	 * Constructor 
+	 * 
+	 * @param id La id del elemento
+	 */
 	public Elemento(int id) {
-		super();
 		this.id = id;
 	}
 
 
+	/**
+	 * Devuelve la id del elemento
+	 * 
+	 * @return La id
+	 */
 	public int getId() {
 		return id;
 	}
 
 
+	/**
+	 * Gasta una lectura
+	 * 
+	 * @return Las lecturas restantes
+	 */
 	public int gastarLectura() {
 		return --lecturasRestantes;
 	}

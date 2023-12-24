@@ -20,7 +20,7 @@ package reto7_06b.b;
  * </p>
  * <p>
  * Cuando un escritor termina su accion desactiva el estado de escritura y notifica a los hilos en espera.
- * Cuando un lector termina su accion, si es el ultimo lector contabilizado desactiva el estado de escritura. Siempre notifica a los hilos en espera.
+ * Cuando un lector termina su accion, si es el ultimo lector contabilizado desactiva el estado de lectura. Siempre notifica a los hilos en espera.
  * </p>
  * <p>
  * El resultado es que que se puede producir varias lecturas o una escritura de manera simultanea y en cuanto hay un escritor esperando 

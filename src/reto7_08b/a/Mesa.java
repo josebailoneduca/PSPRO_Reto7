@@ -2,7 +2,7 @@ package reto7_08b.a;
 
 /**
  * <p>
- * Mesa en a que se colocan ingredientes por parte del proveedor y se recogen 
+ * Mesa en la que se colocan ingredientes por parte del proveedor y se recogen 
  * por parte de los mafiosos.
  * </p>
  * <p>
@@ -14,7 +14,8 @@ package reto7_08b.a;
  * </p>
  * <p>
  * Cuando el proveedor coloca ingredientes queda esperando y cuando un mafioso 
- * termina de comer notifica a los hilos que esperan.
+ * coge los ingredientes notifica a los hilos que esperan haciendo que el 
+ * proveedor coloque inmediatamente otros dos ingredientes.
  * </p>
  * 
  * @author Jose Javier Bailon Ortiz

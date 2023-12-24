@@ -4,6 +4,9 @@ package reto7_10.b;
 
 /**
  * <p>
+ * Main del Reto7_10_B.
+ * </p>
+ * <p>
  * El problema esta resuelto usando un monitor que controla el comportamiento y espera de clientes y barbero. 
  * </p>
  * <p>

@@ -3,6 +3,9 @@ package reto7_10.a;
 
 /**
  * <p>
+ * Main del Reto7_10_A.
+ * </p>
+ * <p>
  * El problema esta resuelto usando semaforos que controlan el comportamiento y espera de clientes y barbero. 
  * </p>
  * <p>

@@ -16,7 +16,7 @@ package reto7_08b.b;
  * <p>
  * Cuando el proveedor entra a colocar ingredientes en la mesa espera el semaforo de proveedor. Una vez adquirido pone los ingredientes y 
  * libera un permiso para acceder a los ingredientes. Cuando los mafiosos van comprobando los ingredientes deben ir esperando el semaforo 
- * de ingredientes. Si son los que necesita retira los ingredientes y libera el semaforo de proveedor. Si no son los que necesit libera un
+ * de ingredientes. Si son los que necesita retira los ingredientes y libera el semaforo de proveedor. Si no son los que necesita libera un
  * permiso del semaforo de ingredientes.
  * </p>
  * 
