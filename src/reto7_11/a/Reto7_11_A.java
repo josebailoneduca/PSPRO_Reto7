@@ -23,7 +23,9 @@ package reto7_11.a;
  * En caso de que la direccion actual y proxima sean la misma se recalcula cual sera la proxima direccion  dando el paso a la entrada 
  * con mas del doble de barcos esperando que la otra. En caso de no haber ninguna en esa situacion la direccion no cambia.
  * </p>
- * 
+ * <p>
+ * Si cuando un barco va a salir es el ultimo en el canal entonces actualiza la direccion actual con la direccion proxima
+ * </p>
  * 
  * @author Jose Javier Bailon Ortiz
  * @see GeneradorDeBarcos

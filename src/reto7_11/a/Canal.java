@@ -24,6 +24,9 @@ package reto7_11.a;
  * con mas del doble de barcos esperando que la otra. En caso de no haber ninguna en esa situacion la direccion no cambia.
  * </p>
  * <p>
+ * Si cuando un barco va a salir es el ultimo en el canal entonces actualiza la direccion actual con la direccion proxima
+ * </p>
+ * <p>
  * Así el canal se vacía el canal y se cambia de dirección de uso cuando el recalculo de dirección establece que la próxima dirección va 
  * a ser una diferente a la actual.
  * </p>
@@ -135,7 +138,6 @@ public class Canal {
 	 * </p>
 	 */
 	public synchronized void salir() {
-		Barco b = (Barco) Thread.currentThread();
 		//recalcular direccion 
 		if (direccionActual==proximaDireccion)
 			recalcularDireccion();
