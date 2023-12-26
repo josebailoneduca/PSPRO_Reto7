@@ -23,6 +23,10 @@ package reto7_11.a;
  * En caso de que la direccion actual y proxima sean la misma se recalcula cual sera la proxima direccion  dando el paso a la entrada 
  * con mas del doble de barcos esperando que la otra. En caso de no haber ninguna en esa situacion la direccion no cambia.
  * </p>
+ * <p>
+ * Así el canal se vacía el canal y se cambia de dirección de uso cuando el recalculo de dirección establece que la próxima dirección va 
+ * a ser una diferente a la actual.
+ * </p>
  * 
  * 
  * 
@@ -45,7 +49,7 @@ public class Canal {
 	private boolean direccionActual = ESTE_OESTE;
 	
 	/**
-	 * Proxima direccion a establecer
+	 * Proxima direccion a establecer cuando el canal este vacio
 	 */
 	private boolean proximaDireccion=ESTE_OESTE;
 	
