@@ -6,29 +6,36 @@ package reto7_11.a;
 
 /**
  * <p>
- * Monitor para controlar el paso de barcos por el canal. 
+ * Monitor para controlar el paso de barcos por el canal.
  * </p>
  * <p>
- * Controla la entrada de barcos gracias principalmente a los atributos direccionActual, proximaDireccion y capacidadRestante. 
+ * Controla la entrada de barcos gracias principalmente a los atributos
+ * direccionActual, proximaDireccion y capacidadRestante.
  * </p>
  * <p>
- * Los barcos acceden al canal ejecutando el metodo entrar() y deben avisar de su salida del canal con el metodo salir() 
+ * Los barcos acceden al canal ejecutando el metodo entrar() y deben avisar de
+ * su salida del canal con el metodo salir()
  * </p>
  * <p>
- * Cuando un barco intenta entrar se le hace esperar si su direccion no es la actual o  se va a cambiar de direccion(actual y proxima no coinciden) 
- * o el canal esta lleno(capacidadrestante = 0).
+ * Cuando un barco intenta entrar se le hace esperar si su direccion no es la
+ * actual o se va a cambiar de direccion(actual y proxima no coinciden) o el
+ * canal esta lleno(capacidadrestante = 0).
  * </p>
  * <p>
- * Cuando un barco sale del canal deja una plaza libre en el. 
- * En caso de que la direccion actual y proxima sean la misma se recalcula cual sera la proxima direccion  dando el paso a la entrada 
- * con mas del doble de barcos esperando que la otra. En caso de no haber ninguna en esa situacion la direccion no cambia.
+ * Cuando un barco sale del canal deja una plaza libre en el. En caso de que la
+ * direccion actual y proxima sean la misma se recalcula cual sera la proxima
+ * direccion dando el paso a la entrada con mas del doble de barcos esperando
+ * que la otra. En caso de no haber ninguna en esa situacion la direccion no
+ * cambia.
  * </p>
  * <p>
- * Si cuando un barco va a salir es el ultimo en el canal entonces actualiza la direccion actual con la direccion proxima
+ * Si cuando un barco va a salir es el ultimo en el canal entonces actualiza la
+ * direccion actual con la direccion proxima
  * </p>
  * <p>
- * Así el canal se vacía el canal y se cambia de dirección de uso cuando el recalculo de dirección establece que la próxima dirección va 
- * a ser una diferente a la actual.
+ * Así el canal se vacía el canal y se cambia de dirección de uso cuando el
+ * recalculo de dirección establece que la próxima dirección va a ser una
+ * diferente a la actual.
  * </p>
  * 
  * 
@@ -41,6 +48,7 @@ public class Canal {
 	 * Constante de direccion ESTE->OESTE
 	 */
 	private final boolean ESTE_OESTE = true;
+	
 	/**
 	 * Constante de direccion OESTE->ESTE
 	 */
@@ -76,13 +84,17 @@ public class Canal {
 	
 	/**
 	 * <p>
-	 * Entrar al canal. Registra el barco como esperando en la entrada sumando la cantidad de la entrada correspondiente
+	 * Entrar al canal. Registra el barco como esperando en la entrada sumando la
+	 * cantidad de la entrada correspondiente
 	 * </p>
 	 * <p>
-	 * Hace esperar si: No lleva la direccion permitida o  se va a cambiar de direccion o el canal esta lleno
+	 * Hace esperar si: No lleva la direccion permitida o se va a cambiar de
+	 * direccion o el canal esta lleno
 	 * </p>
 	 * <p>
-	 * Una vez consigue la entrada se resta de la espera y se resta de la capacidadHace esperar si: No lleva la direccion permitida o  se va a cambiar de direccion o el canal esta lleno
+	 * Una vez consigue la entrada se resta de la espera y se resta de la
+	 * capacidadHace esperar si: No lleva la direccion permitida o se va a cambiar
+	 * de direccion o el canal esta lleno
 	 * </p>
 	 */
 	public synchronized void entrar() {
@@ -125,13 +137,15 @@ public class Canal {
 	
 	/**
 	 * <p>
-	 * Salir del canal. Si no se esta en un cambio de direccion se recalcula la direccion por si hay que cambiarla
+	 * Salir del canal. Si no se esta en un cambio de direccion se recalcula la
+	 * direccion por si hay que cambiarla
 	 * </p>
 	 * <p>
 	 * Deja una plaza libre en la capacidad del canal.
 	 * </p>
 	 * <p>
-	 * Si no queda nadie mas en el canal actualiza la direccion actual con la direccion proxima
+	 * Si no queda nadie mas en el canal actualiza la direccion actual con la
+	 * direccion proxima
 	 * </p>
 	 * <p>
 	 * Notifica a los hilos en espera

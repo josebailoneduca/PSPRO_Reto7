@@ -3,26 +3,27 @@ package reto7_13.a;
 
 /**
  * <p>
- * Main del Reto7_8B_A.
+ * Main del Reto7_13_A.
  * </p>
  * <p>
- * En esta clase main se crea un buffer, un productor y varios consumidores. El productor y cada consumidor son hebras.
+ * En esta clase main se comprueba si la configuracion es correcta (debe haber
+ * al menos dos no matematicos si hay matematicos), crea el bote, crea los
+ * viajeros e inicia los hilos de los viajeros y el del bote.
  * </p>
  * <p>
- * El productor va introduciendo a velocidad variable elementos al buffer y estos son leidos a diferente 
- * velocidad por cada consumidor. Cuando todos los consumidores lo han leido se considera eliminado.
+ * Los viajeros durante su carrera piden subir al bote y una vez que han
+ * accedido piden bajar de el.
  * </p>
  * <p>
- * El control de insercion y borrado se realiza en el propio buffer. A traves de semaforos, cabeza escritora y 
- * cabezas lectoras controla cuando y donde se puede escribir y cuando y por donde debe leer cada consumidor.
+ * El bote controla el flujo de entrada y salida de viajeros. En la
+ * orilla deja entrar viajeros y les va dejando salir del bote en la orilla 
+ * destino siguiendo unas normas para garantizar que no se quede nadie sin viajar. 
+ * Cuando ya no quedan viajeros que trasladar el programa termina.
  * </p>
- * <p>
- * Para ver en detalle ese control vea la documentacion de la clase Buffer
- * </p>
+ * 
  * @author Jose Javier Bailon Ortiz
- * @see Buffer
- * @see Productor
- * @see Consumidor
+ * @see Bote
+ * @see Viajero
  * 
  */
 public class Reto7_13_A {
@@ -31,19 +32,18 @@ public class Reto7_13_A {
 	
 	
 	public static void main(String[] args) {
+		
+		//comprobar que la configuracion es valida
 		if (Config.N_MATEMATICOS>1&&Config.N_NO_MATEMATICOS==1) {
-			
 			System.out.println("No puede haber un solo no matematico y mas de un matematico");
 			System.out.println("Cambie los parametros en el archivo de configuracion reto7_13.a.Config.java");
 			System.exit(0);
 		}
 		
-		
-		
-		
-		
+		//crear bote
 		Bote bote = new Bote();
 		
+		//crear e iniciar viajeros
 		for (int i=0;i<Config.N_MATEMATICOS;i++) {
 			new Viajero(true,"ma"+i,bote).start();
 		}
@@ -52,18 +52,19 @@ public class Reto7_13_A {
 			new Viajero(false,"no"+i,bote).start();
 		}
 		
+		//Iniciar bote
 		bote.start();
 
+		
+		
+		// bucle que muestra el estado del sistema en pantalla cada 500 ms
 		while (true) {
 			Estadistica.mostrarEstadistica();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
 		}
-	}
-}
+	}// fin de main
+}//fin de clase
