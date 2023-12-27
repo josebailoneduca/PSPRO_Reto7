@@ -75,6 +75,7 @@ import java.util.stream.Collectors;
  * </p>
  * 
  * @author Jose Javier Bailon Ortiz
+ * @see Viajero
  */
 public class Bote extends Thread {
 
