@@ -52,8 +52,11 @@ package reto7_14.a;
 public class Reto7_14_A {
 
 	public static void main(String[] args) {
+		
+		//crear aparcamiento
 		Aparcamiento aparcamiento = new Aparcamiento();
 
+		//iniciar generador de coches
 		new GeneradorDeCoches(aparcamiento).start();
 
 		// bucle que muestra el estado del sistema en pantalla cada 500 ms

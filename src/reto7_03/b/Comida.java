@@ -20,7 +20,7 @@ public class Comida {
 	synchronized public void cogerSitio() {
 		if (plazasOcupadas>=Config.PLAZAS_COMIDA)
 			try {
-				this.wait();
+				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

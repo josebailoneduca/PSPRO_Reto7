@@ -42,7 +42,7 @@ public class Fabrica {
 		try {
 			// esperar a que falta caja
 			while (cajaParaLLenar!=null)
-				this.wait();
+				wait();
 			// poner la caja
 			cajaParaLLenar = caja;
 			// avisar a quienes esten esperando
@@ -62,7 +62,7 @@ public class Fabrica {
 		try {
 			// esperar a que la caja este llena
 			while (cajaParaLLenar.getCapacidadDisponible()!=0)
-				this.wait();
+				wait();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -83,7 +83,7 @@ public class Fabrica {
 		try {
 			//esperar a caja con plazas
 			while (cajaParaLLenar==null||cajaParaLLenar.getCapacidadDisponible()==0)
-				this.wait();
+				wait();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
